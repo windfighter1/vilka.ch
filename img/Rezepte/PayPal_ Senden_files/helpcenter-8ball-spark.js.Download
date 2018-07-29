@@ -1,0 +1,137 @@
+/* eslint-disable */
+function loadScript(src,country,locale, callback){
+  var script,
+    ready,
+    tag;
+
+  ready = false;
+  script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = src;
+  script.setAttribute('country',country);
+  script.setAttribute('locale',locale);
+  script.onload = script.onreadystatechange = function onReadyStateChange() {
+    if (!ready && (!this.readyState || this.readyState === 'complete')) {
+      ready = true;
+      callback();
+    }
+  };
+
+  script.onerror = function(error){
+    var source = error && error.target && error.target.src;
+    console.error('The script \''+ source + "\'is not found, please check the country and locale code");
+  }
+
+  tag = document.getElementsByTagName('script')[0];
+  tag.parentNode.insertBefore(script, tag);
+}
+
+function loadStyleSheet(filename) {
+  var tag = document.createElement('link');
+  tag.rel = 'stylesheet';
+  tag.type = 'text/css';
+  tag.href = filename;
+  document.getElementsByTagName('head')[0].appendChild(tag);
+}
+
+// url derived from address bar
+function getBaseUrlFromAddressBar() {
+  console.warn('Suggested to use this option for development environment only \n Please configure \'apiBaseUrl\' via \'settings\' property');
+  var protocol = window.location.protocol;
+  var host = window.location.host;
+  return protocol+'//'+host;
+}
+
+// function executor with timeout time to waiting API loaded
+function helpCenterProcessor(HelpAPI, func, timeout, args) {
+  if (HelpAPI && func) {
+    try {
+      setTimeout(function() { if (HelpAPI[func]) HelpAPI[func](args); }, timeout);
+    } catch (error) { console.error('helpcenterapi executor error: ', error); }
+  }
+}
+
+function sessionPersistLoader(callback) {
+  // Loading script if the session display is equal to true
+  if (sessionStorage && sessionStorage['reduxPersist:viewport'] && JSON.parse(sessionStorage['reduxPersist:viewport']).show) {
+    callback();
+  }
+}
+
+function scriptCallBack(root, options, helpcenterapi, func, args) {
+  root.helpcenterapi = helpcenterapi;
+
+  if (options.onLoadComplete && typeof options.onLoadComplete === 'function') {
+    options.onLoadComplete.call(options, options.settings);
+  }
+
+  if (func) {
+    helpCenterProcessor(helpCenterApi, func, 300, args);
+  }
+}
+
+(function(root, factory) {
+  factory(root);
+}(this, function (root) {
+  'use strict';
+
+  function loadHelpCenterApi(func, args) {
+    var options = {},
+      settings,
+      apiBaseUrl;
+
+    if (root.initHelpCenter && typeof root.initHelpCenter === 'function') {
+      options = root.initHelpCenter();
+      settings = options.settings || {};
+      apiBaseUrl = settings.apiBaseUrl; // TODO: validate trailing slash in the url
+    } else {
+      console.warn('No \'initHelpCenter\' function found in the scope, loading the helpcenter api without initializing');
+    }
+    // try setting apiBaseUrl via host address
+    apiBaseUrl = apiBaseUrl || getBaseUrlFromAddressBar();
+
+    loadStyleSheet(apiBaseUrl + '/smarthelp/css/minihelp-8ball.css');
+
+    var country = (settings && settings.country) || 'US';
+    var locale = (settings && settings.locale) || 'en_US';
+    loadScript(apiBaseUrl + '/smarthelp/js/helpcenterapi.js',country,locale, function () {
+      if (typeof require !== 'undefined') {
+        require(['helpcenterapi'], function(helpcenterapi) {
+          scriptCallBack(root, options, helpcenterapi, func, args);
+        });
+      } else {
+        scriptCallBack(root, options, helpcenterapi, func, args);
+      }
+    });
+
+    loadScript('https://www.paypalobjects.com/helpcenter/vendor/tealeaf/tealeaf-selfhelp-prod_domcap.min.js', country, locale, function() {});
+  }
+
+  function loadChatApi() {
+    var apiBaseUrl = getBaseUrlFromAddressBar();
+
+    loadStyleSheet(apiBaseUrl + '/smarthelp/css/chat/node-chat.css');
+
+    var script = document.createElement('script');
+    script.src = apiBaseUrl + '/smarthelp/js/chat/node-chat.js';
+
+    var tag = document.getElementsByTagName('script')[0];
+    tag.parentNode.insertBefore(script, tag);
+  }
+
+  // Load Contextual help API
+  root.helpCenterSpark = function(func, args) {
+    if (Object.prototype.hasOwnProperty.call(root, 'helpcenterapi')) {
+      helpCenterProcessor(helpCenterApi, func, 0, args);
+    } else {
+      loadHelpCenterApi(func, args);
+    }
+  }
+
+  loadChatApi();
+
+  // Loading script if the session display is equal to true
+  sessionPersistLoader(function() {
+    loadHelpCenterApi()
+  });
+}));

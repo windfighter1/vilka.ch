@@ -1,0 +1,429 @@
+<!doctype html>
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="css/Rezepteseite.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+
+
+  <title>VILKA</title>
+</head>
+
+<body>
+  <nav class="navbar sticky-top navbar-expand-lg navbar-dark ">
+
+
+
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="Home.html">
+        <div class="imgcontainer">
+          <img class="main" src="img/fork1.png" height="35" alt="VILKA">
+          <img class="glow" src="img/fork1.png" height="35">
+        </div>
+      </a>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="Home.html">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="Kategorien.html" id="navbarDropdown">
+              Rezepte
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="Kategorien/Nach_Art.html">Nach Art</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="+suche.html">Nach Zutaten</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="Kategorien/Aus_aller_Welt.html">Aus aller Welt</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="Kategorien/Für_besondere_Anlässe.html">Für besondere Anlässe</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="Kategorien/Ernährung_&_Allergien.html">Ernährung & Allergien</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="Kategorien/Drinks_&_Desserts.html">Drinks & Desserts</a>
+            </div>
+          </li>
+          <li class="nav-item">
+              <button id="btnLogin" data-toggle="modal" data-target="#myModal" type="button1" class="btn btn-sm btn-outline-light">Registrieren / Anmelden</button>
+          </li>
+          <li class="nav-item">
+            <div class="container2">
+              <div class="search-box">
+                <input type="text">
+                <span></span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <div class="content">
+    <div class="container">
+
+      <nav aria-label="breadcrumb-dark">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">Rezepte</li>
+        </ol>
+      </nav>
+
+
+      <div class="row">
+        <div class="column">
+          <a href="Rezeptdetail.html?id=1">
+            <div class="img_container">
+              <img src="img\Rezepte\bocca.jpg">
+            </div>
+            <div class="teaser__inner">
+              <h3>Saltimbocca
+                <i class="em em-it"></i>
+              </h3>
+              <h6 class="thin">
+                <i>&nbsp;/saltimˈbokka/</i>
+              </h6>
+              <br>
+              <h6>
+                <i class="fa fa-info-circle"></i> Karnivore</h6>
+              <h6>
+                <i class="	fa fa-clock-o"></i> 25min</h6>
+
+
+            </div>
+          </a>
+        </div>
+        <div class="column">
+          <a href="Rezeptdetail.html?id=2">
+            <div class="img_container">
+              <img src="img\Rezepte\gerichtsart.jpg">
+
+            </div>
+            <div class="teaser__inner">
+              <h3>Bockwurst
+                <i class="em em-de"></i>
+              </h3>
+              <h6 class="thin">
+                <i>&nbsp;/'bɔkvʊrst/</i>
+              </h6>
+              <br>
+
+              <h6>
+                <i class="fa fa-info-circle"></i> Karnivore</h6>
+              <h6>
+                <i class="	fa fa-clock-o"></i> 20min</h6>
+            </div>
+          </a>
+        </div>
+        <div class="column">
+          <a href="Rezeptdetail.html">
+            <div class="img_container">
+              <img src="img\Rezepte\souvlaki.jpg">
+            </div>
+            <div class="teaser__inner">
+              <h3>Souvlaki
+                <i class="em em-flag-gr"></i>
+              </h3>
+              <h6 class="thin">
+                <i>&nbsp;/suvˈlɑ kyɑ/</i>
+              </h6>
+              <br>
+
+              <h6>
+                <i class="fa fa-info-circle"></i> Karnivore</h6>
+              <h6>
+                <i class="	fa fa-clock-o"></i> 40min</h6>
+
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column">
+          <a href="Rezeptdetail.html">
+            <div class="img_container">
+              <img src="img\Rezepte\rosti.jpg">
+            </div>
+            <div class="teaser__inner">
+              <h3>Rösti
+                <i class="em em-flag-ch"></i>
+              </h3>
+              <h6 class="thin">
+                <i>&nbsp;/ˈrəːsti/</i>
+              </h6>
+              <br>
+
+              <h6>
+                <i class="fa fa-info-circle"></i> Vegetarisch</h6>
+              <h6>
+                <i class="	fa fa-clock-o"></i> 35min</h6>
+
+            </div>
+          </a>
+        </div>
+        <div class="column">
+          <a href="Rezeptdetail.html">
+            <div class="img_container">
+              <img src="img\Rezepte\bibimbab.jpg">
+            </div>
+            <div class="teaser__inner">
+              <h3>Bibimbab
+                <i class="em em-kr"></i>
+              </h3>
+              <h6 class="thin">
+                <i>&nbsp;/ˈbiːbɪmbæp/</i>
+              </h6>
+              <br>
+              <h6>
+                <i class="fa fa-info-circle"></i> Vegetarisch</h6>
+              <h6>
+                <i class="	fa fa-clock-o"></i> 40min</h6>
+            </div>
+          </a>
+        </div>
+        <div class="column">
+          <a href="Rezeptdetail.html">
+            <div class="img_container">
+              <img src="img\Rezepte\plov.jpg">
+            </div>
+            <div class="teaser__inner">
+              <h3>Pilaf
+                <i class="em em-flag-kz"></i>
+              </h3>
+              <h6 class="thin">
+                <i>&nbsp;/plˈof/</i>
+              </h6>
+              <br>
+              <h6>
+                <i class="fa fa-info-circle"></i> Karnivore</h6>
+              <h6>
+                <i class="	fa fa-clock-o"></i> 1h 30min</h6>
+            </div>
+          </a>
+        </div>
+
+        <div class="row">
+          <div class="column">
+            <a href="Rezeptdetail.html">
+              <div class="img_container">
+                <img src="img\Rezepte\ramen.jpg">
+              </div>
+              <div class="teaser__inner">
+                <h3>Ramen
+                  <i class="em em-jp"></i>
+                </h3>
+                <h6 class="thin">
+                  <i>&nbsp;/rāmen/</i>
+                </h6>
+                <br>
+                <h6>
+                  <i class="fa fa-info-circle"></i> Vegetarisch</h6>
+                <h6>
+                  <i class="	fa fa-clock-o"></i> 20min</h6>
+              </div>
+            </a>
+          </div>
+          <div class="column">
+            <a href="Rezeptdetail.html">
+              <div class="img_container">
+                <img src="img\Rezepte\mezze.jpg">
+              </div>
+              <div class="teaser__inner">
+                <h3>Mezze
+                  <i class="em em-flag-tr"></i>
+                </h3>
+                <h6 class="thin">
+                  <i>&nbsp;/ˈmɛzeɪ/</i>
+                </h6>
+                <br>
+                <h6>
+                  <i class="fa fa-info-circle"></i> Vegetarisch</h6>
+                <h6>
+                  <i class="	fa fa-clock-o"></i> 20min</h6>
+              </div>
+            </a>
+          </div>
+          <div class="column">
+            <a href="Rezeptdetail.html">
+              <div class="img_container">
+                <img src="img\Rezepte\creamajpg.jpg">
+              </div>
+              <div class="teaser__inner">
+                <h3>Crema Catalana
+                  <i class="em em-flag-ea"></i>
+                </h3>
+                <h6 class="thin">
+                  <i>&nbsp;/ˈkɾe.ma/ /ka.ta.ˈla.na/</i>
+                </h6>
+                <br>
+                <h6>
+                  <i class="fa fa-info-circle"></i> Vegetarisch</h6>
+                <h6>
+                  <i class="	fa fa-clock-o"></i> 20min</h6>
+              </div>
+            </a>
+          </div>
+
+          <button href="#" type="button2" class="btn btn-sm btn-outline-light">Mehr Laden</button>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <!--Footer-->
+    <footer class="page-footer">
+
+      <hr class="featurette-divider">
+      <div class="container">
+        <!--Footer Links-->
+        <div class="row">
+
+          <!--First column-->
+          <div class="col-md-6">
+            <ul>
+              <li>
+                <a href="#">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fab fa-google-plus-g"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fab fa-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fab fa-paypal"></i>
+                </a>
+              </li>
+            </ul>
+
+            <div class="arrow">
+              <a href="#">
+                <i class="fas fa-angle-up"></i>
+              </a>
+            </div>
+
+          </div>
+          <!--/.First column-->
+
+        </div>
+
+      </div>
+      <!--/.Footer Links-->
+
+    </footer>
+    <!--/.Footer-->
+    <script>
+      $(document).ready(function () {
+
+        var id = getQueryVariable("id");
+        var gefundenesRezept = RezeptNachIdSuchen(id);
+
+        if (gefundenesRezept != null) {
+          SetTitle(gefundenesRezept);
+
+          SetSubTitle(gefundenesRezept);
+
+          SetDesc(gefundenesRezept);
+
+          SetInfo(gefundenesRezept);
+
+          SetOrigin(gefundenesRezept);
+
+          SetTime(gefundenesRezept);
+
+          SetTags(gefundenesRezept);
+
+          SetImage(gefundenesRezept);
+        }
+        else {
+          alert("Es konnte kein Rezept gefunden werden mit der id: " + id)
+        }
+
+      });
+
+      function SetTitle(rezept) {
+        document.getElementById("title").innerHTML = rezept.title
+      }
+
+      function SetSubTitle(rezept) {
+        document.getElementById("subtitle").innerHTML = rezept.subtitle
+      }
+
+      function SetDesc(rezept) {
+        document.getElementById("description").innerHTML = rezept.description
+      }
+
+      function SetInfo(rezept) {
+        document.getElementById("info").innerHTML = rezept.info
+      }
+
+      function SetOrigin(rezept) {
+        document.getElementById("origin").innerHTML = rezept.origin
+      }
+
+      function SetTime(rezept) {
+        document.getElementById("time").innerHTML = rezept.time
+      }
+
+      function SetTags(rezept) {
+        document.getElementById("tags").innerHTML = rezept.tags
+      }
+
+      function SetImage(rezept) {
+        document.getElementById("bild").src = "img\\Rezepte\\" + rezept.imagePath
+      }
+
+      function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split("=");
+          if (pair[0] == variable) { return pair[1]; }
+        }
+        return (false);
+      }
+
+      /*yscroll für modal*/
+      $('#btnLogin').on('click', function (e) {
+        var modalDialog = $('#myModal .modal-dialog');
+        var yScrollOffset = window.pageYOffset;
+        modalDialog.css('top', yScrollOffset);
+      });
+
+    </script>
+
+</body>
+
+</html>

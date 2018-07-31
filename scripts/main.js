@@ -15,6 +15,34 @@ function Rezept(id, title, flag, subtitle, description, info, origin, time, tags
   this.country = country;
   this.zutatenListe = zutatenListe;
 
+  this.IsPescetarian = function () {
+    for (var i = 0; i < zutatenListe.length; i++) {
+      if (zutatenListe[i].fisch == true && zutatenListe[i].fleisch == false) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  this.IsVegan = function(){
+    var zutat="";  
+    for (var i = 0; i < zutatenListe.length; i++) {
+        zutat = GetZutatById(zutatenListe[i]);
+        if (zutat.vegan == false) {
+          return false;
+        }
+      }
+      return true;
+  }
+
+  // function IsPescetarian() {
+  //   for (var i = 0; i < zutatenListe.length; i++) {
+  //     if (zutatenListe[i].fisch == true && zutatenListe[i].fleisch == false) {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+
   function IsVegetarian() {
     for (var i = 0; i < zutatenListe.length; i++) {
       if (zutatenListe[i].veget == false) {
@@ -23,14 +51,14 @@ function Rezept(id, title, flag, subtitle, description, info, origin, time, tags
     }
     return true;
   }
-  function IsVegan() {
-    for (var i = 0; i < zutatenListe.length; i++) {
-      if (zutatenListe[i].vegan == false) {
-        return false;
-      }
-    }
-    return true;
-  }
+  // function IsVegan() {
+  //   for (var i = 0; i < zutatenListe.length; i++) {
+  //     if (zutatenListe[i].vegan == false) {
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
   function IsMeat() {
     for (var i = 0; i < zutatenListe.length; i++) {
       if (zutatenListe[i].fleisch == true) {
@@ -76,62 +104,134 @@ function Rezept(id, title, flag, subtitle, description, info, origin, time, tags
     return true;
   }
 
+}
 
-  function GetInfo() {
-    var info = "";
 
-    if (IsVegetarian() == true) {
-      info += "|Vegetarisch| ";
-    }
+function FilterRecipeByInfo(value) {
+  var resultList = new Array();
+  switch (value) {
 
-    if (IsVegan() == true) {
-      info += "|Vegan| ";
-    }
-
-    if (IsMeat() == true) {
-      info += "|Fleisch| ";
-    }
-
-    if (IsFish() == true) {
-      info += "|Fisch| ";
-    }
-
-    if (IsMeat() == false) {
-      if (IsFish() == true) {
-
-        info += "|Pescetarisch| ";
+    case "IsPescetarian":
+      for (var i = 0; i < rezepte.length; i++) {
+        if (rezepte[i].IsPescetarian() == true) {
+          resultList.push(rezepte[i]);
+        }
       }
-    }
+      break;
 
-    if (IsNutFree() == false) {
-      info += "|Enthält Nüsse| ";
-    }
+    case "IsVegetarian":
+      for (var i = 0; i < rezepte.length; i++) {
+        if (rezepte[i].IsVegetarian() == true) {
+          resultList.push(rezepte[i]);
+        }
+      }
+      break;
 
-    if (IsGlutenFree() == true) {
-      info += "|Glutenfrei| ";
-    }
+    case "IsVegan":
+      for (var i = 0; i < rezepte.length; i++) {
+        if (rezepte[i].IsVegan()) {
+          resultList.push(rezepte[i]);
+        }
+      }
+      break;
 
-    if (IsLactoseFree() == true) {
-      info += "|Lactosefrei| ";
-    }
+    case "IsNutFree":
+      for (var i = 0; i < rezepte.length; i++) {
+        if (rezepte[i].IsNutFree() == true) {
+          resultList.push(rezepte[i]);
+        }
+      }
+      break;
 
-    return info;
+    case "IsGlutenFree":
+      for (var i = 0; i < rezepte.length; i++) {
+        if (rezepte[i].IsGlutenFree() == true) {
+          resultList.push(rezepte[i]);
+        }
+      }
+      break;
+
+    case "IsLactoseFree":
+      for (var i = 0; i < rezepte.length; i++) {
+        if (rezepte[i].IsLactoseFree() == true) {
+          resultList.push(rezepte[i]);
+        }
+      }
+      break;
 
   }
+  return resultList
+}
 
+
+
+
+function GetInfo() {
+  var info = "";
+
+  if (IsVegetarian() == true) {
+    info += "|Vegetarisch| ";
+  }
+
+  if (IsVegan() == true) {
+    info += "|Vegan| ";
+  }
+
+  if (IsMeat() == true) {
+    info += "|Fleisch| ";
+  }
+
+  if (IsFish() == true) {
+    info += "|Fisch| ";
+  }
+
+  if (IsMeat() == false) {
+    if (IsFish() == true) {
+
+      info += "|Pescetarisch| ";
+    }
+  }
+
+  if (IsNutFree() == false) {
+    info += "|Enthält Nüsse| ";
+  }
+
+  if (IsGlutenFree() == true) {
+    info += "|Glutenfrei| ";
+  }
+
+  if (IsLactoseFree() == true) {
+    info += "|Lactosefrei| ";
+  }
+
+  return info;
 
 }
 
 var rezepte = [// title,       flag,         subtitle,            description,                     info,                origin,       time,      tags,           imagePath, country, zutatenListe
-  new Rezept(1, "Souvlaki", "em-flag-gr", "/suvˈlɑ kyɑ/", "blablablablablablablablabla", "Vegetarisch, Ohne Nüsse", "Europa", "20 min", "Greek, Fleisch", "souvlaki.jpg", "Griechenland", [0, 1]),
-  new Rezept(2, "Bockwurst", "em-de", "/'bɔkvʊrst/", "blablablablablablablabla", "Fleischetarisch, mit sehr viel Nüssen", "Europa", "20 min", "Deutsch, Fleisch", "gerichtsart.jpg", "Deutschland", []),
-  new Rezept(3, "Saltimbocca", "em-flag-it", "/saltimˈbokka/", "blablablablablablablablabla", "Nicht so Vegi", "Europa", "25 min", "Italian, Gebraten, Und so", "bocca.jpg", "Italien", []),
-  new Rezept(4, "Pistache Glace", "em-flag-mx", "/'asdagasfad/", "blablablablablablablabla", "Vegi, mit sehr viel Nüssen", "Nordamerika", "40 min", "Mexican, Icecream", "dessert.jpg", "Mexico", []),
-  new Rezept(5, "Mezze", "em-flag-tr", "/ˈmɛzeɪ/", "blablablablablablablablabla", "Fleisch undso", "Asien", "60 min", "Türkei, Fleisch", "mezze.jpg", "Türkei", []),
-  new Rezept(6, "Rösti", "em-flag-ch", "/ˈrəːsti/", "blablablablablablablabla", "Vegi", "Europa", "40 min", "Schweiz, Härdöpfel", "rosti.jpg", "Schweiz", []),
-  new Rezept(7, "Shashlik", "em-flag-kz", "/shashlýk/", "blablablablablablablabla", "Nöd eso Vegi", "Asien", "60 min", "Kazakhstan, Grill", "Shashlik.jpg", "Kazakhstan", []),
-  new Rezept(8, "Ramen", "em-flag-jp", "/ramen/", "blablablablablablablabla", "Nöd eso Vegi", "Asien", "120 min", "Japan, Suppe", "Ramen.jpg", "Japan", []),
+  new Rezept(1, "Souvlaki mit Tzatziki", "em-flag-gr", "/suvˈlɑ kyɑ/", "blablablablablablablablabla", "Vegetarisch, Ohne Nüsse", "Europa", "20 min", "Greek, Fleisch", "souvlaki.jpg", "Griechenland", [17, 18, 19, 20, 21, 22, 23]),
+  new Rezept(2, "Bockwurst & S-kraut", "em-de", "/'bɔkvʊrst/", "blablablablablablablabla", "Fleischetarisch, mit sehr viel Nüssen", "Europa", "20 min", "Deutsch, Fleisch", "gerichtsart.jpg", "Deutschland", [24, 25]),
+  new Rezept(3, "Saltimbocca", "em-flag-it", "/saltimˈbokka/", "blablablablablablablablabla", "Nicht so Vegi", "Europa", "25 min", "Italian, Gebraten, Und so", "bocca.jpg", "Italien", [26, 27, 28, 21]),
+  new Rezept(4, "Pistache Glace", "em-flag-mx", "/'asdagasfad/", "blablablablablablablabla", "Vegi, mit sehr viel Nüssen", "Nordamerika", "40 min", "Mexican, Icecream", "dessert.jpg", "Mexico", [29, 30, 31, 32]),
+  new Rezept(5, "Mezze", "em-flag-tr", "/ˈmɛzeɪ/", "blablablablablablablablabla", "Fleisch undso", "Asien", "60 min", "Türkei, Fleisch", "mezze.jpg", "Türkei", [33, 34, 35, 36, 37, 32, 18, 20, 14, 6 ]),
+  new Rezept(6, "Rösti", "em-flag-ch", "/ˈrəːsti/", "blablablablablablablabla", "Vegi", "Europa", "40 min", "Schweiz, Härdöpfel", "rosti.jpg", "Schweiz", [38, 39, 40, 41]),
+  new Rezept(7, "Shashlik", "em-flag-kz", "/shashlýk/", "blablablablablablablabla", "Nöd eso Vegi", "Asien", "60 min", "Kazakhstan, Grill", "Shashlik.jpg", "Kazakhstan", [42, 43, 12, 20, 22 ]),
+  new Rezept(8, "Ramen", "em-flag-jp", "/ramen/", "blablablablablablablabla", "Nöd eso Vegi", "Asien", "120 min", "Japan, Suppe", "Ramen.jpg", "Japan", [44, 45, 46, 47, 1]),
+  new Rezept(9, "Lachssalat", "em-flag-jp", "/leksseled/", "blablablablablablablabla", "fishyboi", "Asien", "15 min", "Japan, Salat", "Ramen.jpg", "Japan", [48, 49, 46, 20]),
+  new Rezept(10, "Bauchspeckshecht", "em-de", "/bechspeckshaicht/", "blablablablablablablabla", "fishyboi", "Europa", "30 min", "Deutschland, Fisch", "Ramen.jpg", "Japan", [50, 5, 38]),
 ];
+
+function FilterListByProperty(list, key, value) {
+  var resultList = new Array();
+  var object;
+  for (var i = 0; i < list.length; i++) {
+    object = list[i];
+    if (object[key] == value) {
+      resultList.push(object);
+    }
+  }
+  return resultList;
+}
 
 function Zutat(id, name, mehrzahl, veget, vegan, fleisch, fisch, nüsse, gluten, lactose) {
 
@@ -165,6 +265,40 @@ var Zutaten = [ //             veget, vegan, fleisch, fisch, nüsse, gluten, lac
   new Zutat(14, "Dattel", "Datteln", true, true, false, false, false, false, false),
   new Zutat(15, "Dill", "Dill", true, true, false, false, false, false, false),
   new Zutat(16, "Dinkelmehl", "Dinkelmehl", true, true, false, false, false, true, false),
+  new Zutat(17, "Hackfleisch", "Hackfleisch", false, false, true, false, false, false, false),
+  new Zutat(18, "Yoghurt", "Yoghurt", true, false, false, false, false, false, true),
+  new Zutat(19, "Gurke", "Gurken", true, true, false, false, false, false, false),
+  new Zutat(20, "Knoblauch", "Knoblauch", true, false, false, false, false, false, false),
+  new Zutat(21, "Olivenöl", "Olivenöl", true, true, false, false, false, false, false),
+  new Zutat(22, "Zwiebel", "Zwiebeln", true, false, false, false, false, false, false),
+  new Zutat(23, "Zitrone", "Zitronen", true, true, false, false, false, false, false),
+  new Zutat(24, "Bockwurst", "Bockwürste", false, false, true, false, false, false, false),
+  new Zutat(25, "Sauerkraut", "Sauerkraut", true, true, false, false, false, false, false),
+  new Zutat(26, "Salbei", "Salbei", true, true, false, false, false, false, false),
+  new Zutat(27, "Kalbsplätzchen", "Kalbsplätzchen", false, false, true, false, false, false, false),
+  new Zutat(28, "Rohschinken", "Rohschinken", false, false, true, false, false, false, false),
+  new Zutat(29, "Pistache", "Pistache", true, true, false, false, false, false, false),
+  new Zutat(30, "Zucker", "Zucker", true, true, false, false, false, false, false),
+  new Zutat(31, "Ei", "Eier", true, false, false, false, false, false, false),
+  new Zutat(32, "Rahm", "Rahm", true, false, false, false, false, false, true),
+  new Zutat(33, "Tülüm Käse", "Tülüm Käse", true, false, false, false, false, false, true),
+  new Zutat(34, "Falafel", "Falafel", true, true, false, false, false, false, false),
+  new Zutat(35, "Obergine", "Oberginen", true, true, false, false, false, false, false),
+  new Zutat(36, "Tomate", "Tomaten", true, true, false, false, false, false, false),
+  new Zutat(37, "Bulgur", "Bulgur", true, true, false, false, false, true, false),
+  new Zutat(38, "Kartoffel", "Kartoffeln", true, true, false, false, false, false, false),
+  new Zutat(39, "Butter", "Butter", true, false, false, false, false, false, true),
+  new Zutat(40, "Salz", "Salz", true, true, false, false, false, false, false),
+  new Zutat(41, "Pfeffer", "Pfeffer", true, true, false, false, false, false, false),
+  new Zutat(42, "Lammfleisch", "Lammfleisch", false, false, true, false, false, false, false),
+  new Zutat(43, "Essig", "Essig", true, true, false, false, false, false, false),
+  new Zutat(44, "Ramennudeln", "Ramennudeln", true, false, false, false, false, true, false),
+  new Zutat(45, "Entrecote", "Entrecote", false, false, true, false, false, false, false),
+  new Zutat(46, "Misopaste", "Misopaste", true, true, false, false, false, true, false),
+  new Zutat(47, "Sojasosse", "Sojasosse", true, true, false, false, false, true, false),
+  new Zutat(48, "Lachsfilet", "Lachsfilet", false, false, false, true, false, false, false),
+  new Zutat(49, "Salat", "Salat", true, true, false, false, false, false, false),
+  new Zutat(50, "Hecht", "Hecht", false, false, false, true, false, false, false),
 ];
 
 function RezeptNachIdSuchen(gesuchteId) {

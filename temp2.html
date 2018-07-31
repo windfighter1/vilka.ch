@@ -48,9 +48,9 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="Kategorien/Nach_Art.html">Nach Art</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="+suche.html">Nach Zutaten</a>
+                            <a class="dropdown-item" href="Kategorien/Nach_Art.html">Nach Art</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="+suche.html">Nach Zutaten</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="Kategorien/Aus_aller_Welt.html">Aus aller Welt</a>
                             <div class="dropdown-divider"></div>
@@ -62,14 +62,14 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                            <button id="btnLogin" data-toggle="modal" data-target="#myModal" type="button1" class="btn btn-sm btn-outline-light">Registrieren / Anmelden</button>
+                        <button id="btnLogin" data-toggle="modal" data-target="#myModal" type="button1" class="btn btn-sm btn-outline-light">Registrieren / Anmelden</button>
                     </li>
                     <li class="nav-item">
                         <div class="container2">
                             <div class="search-box">
-                             <form action="Kategorien/Ernährung_&_Allergien.html">    
-                                <input type="search" id="myInput" name="q">
-                               </form>
+                                <form action="Kategorien/Ernährung_&_Allergien.html">
+                                    <input type="search" id="myInput" name="q">
+                                </form>
                                 <span></span>
                             </div>
                         </div>
@@ -157,9 +157,25 @@
         <!--/.Footer-->
         <script>
             $(document).ready(function () {
-                var id = getQueryVariable("id");
-                CallRecipeAPI(id);
-                loadRecipes();
+                // var id = getQueryVariable("id");
+                // CallRecipeAPI(id);
+                var filterQS = getQueryVariable("filter");
+                var valueQS = getQueryVariable("value");
+                if (filterQS && valueQS) {
+
+                    if (filterQS == "Ernaehrung") {
+                        var filteredList = FilterRecipeByInfo(valueQS)
+                        loadRecipes(filteredList);
+                    }
+                    else {
+                        var filteredList = FilterListByProperty(rezepte, filterQS, valueQS);
+                        loadRecipes(filteredList);
+                    }
+                }
+
+                else {
+                    loadRecipes(rezepte);
+                }
 
 
                 // if (gefundenesRezept != null) {
@@ -185,93 +201,79 @@
 
             });
 
-            function loadRecipes() {
+            function loadRecipes(rezeptliste) {
 
-                for (var i = 0; i < rezepte.length; i++) {
+                for (var i = 0; i < rezeptliste.length; i++) {
                     if (i % 3 == 0) {
-                        $("<div class='row'><div class='column' id='recipe_" + rezepte[i].id + "'></div></div>").appendTo("#recipewrapper");
+                        $("<div class='row'><div class='column' id='recipe_" + rezeptliste[i].id + "'></div></div>").appendTo("#recipewrapper");
                     }
                     else {
-                        $("<div class='column' id='recipe_" + rezepte[i].id + "'></div>").appendTo("#recipewrapper .row:last");
+                        $("<div class='column' id='recipe_" + rezeptliste[i].id + "'></div>").appendTo("#recipewrapper .row:last");
                     }
-                    $("<a href='Rezeptdetail.html?id=" + rezepte[i].id + "'></a>").appendTo("#recipe_" + rezepte[i].id);
-                    $("<div class='img_container'></div>").appendTo("#recipe_" + rezepte[i].id + " a");
-                    $("<img src='img\\Rezepte\\" + rezepte[i].imagePath + "'>").appendTo("#recipe_" + rezepte[i].id + " .img_container");
-                    $("<div class='teaser__inner'></div>").appendTo("#recipe_" + rezepte[i].id + " a");
-                    $("<h3>" + rezepte[i].title + " </h3>").appendTo("#recipe_" + rezepte[i].id + " .teaser__inner");
-                    $("<i class='em " + rezepte[i].flag + "'</i>").appendTo("#recipe_" + rezepte[i].id + " .teaser__inner h3");
-                    $("<h6 class='thin'></h6>").appendTo("#recipe_" + rezepte[i].id + " .teaser__inner");
-                    $("<i>" + rezepte[i].subtitle + "</i>").appendTo("#recipe_" + rezepte[i].id + " .thin");
-                    $("<br>").appendTo("#recipe_" + rezepte[i].id + " .teaser__inner");
-                    $("<h6><i class='fa fa-info-circle'></i> " + rezepte[i].info + "</h6>").appendTo("#recipe_" + rezepte[i].id + " .teaser__inner");
-                    $("<h6><i class='fa fa-clock-o'></i> " + rezepte[i].time + "</h6>").appendTo("#recipe_" + rezepte[i].id + " .teaser__inner");
+                    $("<a href='Rezeptdetail.html?id=" + rezeptliste[i].id + "'></a>").appendTo("#recipe_" + rezeptliste[i].id);
+                    $("<div class='img_container'></div>").appendTo("#recipe_" + rezeptliste[i].id + " a");
+                    $("<img src='img\\Rezepte\\" + rezeptliste[i].imagePath + "'>").appendTo("#recipe_" + rezeptliste[i].id + " .img_container");
+                    $("<div class='teaser__inner'></div>").appendTo("#recipe_" + rezeptliste[i].id + " a");
+                    $("<h3>" + rezeptliste[i].title + " </h3>").appendTo("#recipe_" + rezeptliste[i].id + " .teaser__inner");
+                    $("<i class='em " + rezeptliste[i].flag + "'</i>").appendTo("#recipe_" + rezeptliste[i].id + " .teaser__inner h3");
+                    $("<h6 class='thin'></h6>").appendTo("#recipe_" + rezeptliste[i].id + " .teaser__inner");
+                    $("<i>" + rezeptliste[i].subtitle + "</i>").appendTo("#recipe_" + rezeptliste[i].id + " .thin");
+                    $("<br>").appendTo("#recipe_" + rezeptliste[i].id + " .teaser__inner");
+                    $("<h6><i class='fa fa-info-circle'></i> " + rezeptliste[i].info + "</h6>").appendTo("#recipe_" + rezeptliste[i].id + " .teaser__inner");
+                    $("<h6><i class='fa fa-clock-o'></i> " + rezeptliste[i].time + "</h6>").appendTo("#recipe_" + rezeptliste[i].id + " .teaser__inner");
                 }
             }
-                
-                function getQueryVariable(variable) {
+
+            function getQueryVariable(variable) {
                 var query = window.location.search.substring(1);
                 var vars = query.split("&");
                 for (var i = 0; i < vars.length; i++) {
-                var pair = vars[i].split("=");
-                if (pair[0] == variable) { return pair[1]; }
+                    var pair = vars[i].split("=");
+                    if (pair[0] == variable) { return pair[1]; }
                 }
                 return (false);
-    }
+            }
 
 
-function CallRecipeAPI(SearchId) {
-// $.ajax({
-//                         url: "https://api.edamam.com/search?q=" + SearchId + "&app_id=15630df2&app_key=16624c3420140a28ec85b18976bbd138",
-//                         type: 'GET',
-//                         success: function (result) {
-//                            alert(result);
-//                         }
-//                     }); 
- 
-
-}
+            function CallRecipeAPI(SearchId) {
+                // $.ajax({
+                //                         url: "https://api.edamam.com/search?q=" + SearchId + "&app_id=15630df2&app_key=16624c3420140a28ec85b18976bbd138",
+                //                         type: 'GET',
+                //                         success: function (result) {
+                //                            alert(result);
+                //                         }
+                //                     }); 
 
 
-var input = document.getElementById("myInput");
-input.addEventListener("keyup", function(event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        var search = input.value;
-        window.location.href = "Home.html?id=" + search;
-    }
-});
-
-function ApiRezept(id, title, flag, subtitle, description, info, origin, time, tags, imagePath,country) {
-
-this.id = id;
-this.label = title;
-this.flag = flag;
-this.source = subtitle
-this.description = description;
-this.healthLabels = info;
-this.origin = origin;
-this.totaltime = time;
-this.tags = tags;
-this.image = imagePath;
-
-}
-
-var rezepte = [
-new Rezept(1,"Souvlaki","em-flag-gr","/suvˈlɑ kyɑ/","blablablablablablablablabla", "Vegetarisch, Ohne Nüsse" , "Griechenland", "20 min", "Greek, Fleisch", "souvlaki.jpg"),
-new Rezept(2,"Bockwurst","em-de", "/'bɔkvʊrst/","blablablablablablablabla","Fleischetarisch, mit sehr viel Nüssen" , "Deutschland","20 min","Deutsch, Fleisch", "gerichtsart.jpg"),
-new Rezept(3,"Saltimbocca","em-flag-it","/saltimˈbokka/","blablablablablablablablabla", "Nicht so Vegi" , "Italien", "25 min", "Italian, Gebraten, Und so", "bocca.jpg"),
-new Rezept(4,"Pistache Glace","em-flag-mx", "/'asdagasfad/","blablablablablablablabla","Vegi, mit sehr viel Nüssen" , "Mexico","40 min","Mexican, Icecream", "dessert.jpg"),
-new Rezept(5,"Mezze","em-flag-tr","/ˈmɛzeɪ/","blablablablablablablablabla", "Fleisch undso" , "Türkei", "60 min", "Türkei, Fleisch", "mezze.jpg"),
-new Rezept(6,"Rösti","em-flag-ch", "/ˈrəːsti/","blablablablablablablabla","Vegi" , "Schweiz","40 min","Schweiz, Härdöpfel", "rosti.jpg"),
-new Rezept(7,"Shashlik","em-flag-kz", "/shashlýk/","blablablablablablablabla","Nöd eso Vegi" , "Kazakhstan","60 min","Kazakhstan, Grill", "Shashlik.jpg"),
-new Rezept(8,"Ramen","em-flag-jp", "/ramen/","blablablablablablablabla","Nöd eso Vegi" , "Japan","120 min","Japan, Suppe", "Ramen.jpg"),
+            }
 
 
-];
+            var input = document.getElementById("myInput");
+            input.addEventListener("keyup", function (event) {
+                event.preventDefault();
+                if (event.keyCode === 13) {
+                    var search = input.value;
+                    window.location.href = "Home.html?id=" + search;
+                }
+            });
+
+            function ApiRezept(id, title, flag, subtitle, description, info, origin, time, tags, imagePath, country) {
+
+                this.id = id;
+                this.label = title;
+                this.flag = flag;
+                this.source = subtitle
+                this.description = description;
+                this.healthLabels = info;
+                this.origin = origin;
+                this.totaltime = time;
+                this.tags = tags;
+                this.image = imagePath;
+
+            }
 
 
 
-   
             /*yscroll für modal*/
             $('#btnLogin').on('click', function (e) {
                 var modalDialog = $('#myModal .modal-dialog');

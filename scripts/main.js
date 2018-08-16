@@ -1,6 +1,6 @@
 
 
-function Rezept(id, title, flag, subtitle, description, info, origin, time, tags, imagePath, country, zutatenListe) {
+function Rezept(id, title, flag, subtitle, description, info, origin, time, tags, imagePath, country, zutatenListe, art, anlass) {
 
   this.id = id;
   this.title = title;
@@ -14,6 +14,8 @@ function Rezept(id, title, flag, subtitle, description, info, origin, time, tags
   this.imagePath = imagePath;
   this.country = country;
   this.zutatenListe = zutatenListe;
+  this.art = art;
+  this.anlass = anlass;
 
   this.IsPescetarian = function () {
     var containsFish = false;
@@ -233,17 +235,22 @@ function GetInfo() {
 
 }
 
-var rezepte = [// title,       flag,         subtitle,            description,                      info,                origin,       time,      tags,           imagePath, country, zutatenListe
-  new Rezept(1, "Souvlaki mit Tzatziki", "em-flag-gr", "/suvˈlɑ kyɑ/", "blablablablablablablablabla", "Vegetarisch, Ohne Nüsse", "eu", "20 min", "Greek, Fleisch", "souvlaki.jpg", "Griechenland", [17, 18, 19, 20, 21, 22, 23]),
-  new Rezept(2, "Bockwurst & S-kraut", "em-de", "/'bɔkvʊrst/", "blablablablablablablabla", "Fleischetarisch, mit sehr viel Nüssen", "eu", "20 min", "Deutsch, Fleisch", "gerichtsart.jpg", "Deutschland", [24, 25]),
-  new Rezept(3, "Saltimbocca", "em-flag-it", "/saltimˈbokka/", "blablablablablablablablabla", "Nicht so Vegi", "eu", "25 min", "Italian, Gebraten, Und so", "bocca.jpg", "Italien", [26, 27, 28, 21]),
-  new Rezept(4, "Pistache Glace", "em-flag-mx", "/'asdagasfad/", "blablablablablablablabla", "Vegi, mit sehr viel Nüssen", "na", "40 min", "Mexican, Icecream", "dessert.jpg", "Mexico", [29, 30, 31, 32]),
-  new Rezept(5, "Mezze", "em-flag-tr", "/ˈmɛzeɪ/", "blablablablablablablablabla", "Fleisch undso", "as", "60 min", "Türkei, Fleisch", "mezze.jpg", "Türkei", [33, 34, 35, 36, 37, 32, 18, 20, 14, 6]),
-  new Rezept(6, "Rösti", "em-flag-ch", "/ˈrəːsti/", "blablablablablablablabla", "Vegi", "eu", "40 min", "Schweiz, Härdöpfel", "rosti.jpg", "Schweiz", [38, 39, 40, 41]),
-  new Rezept(7, "Shashlik", "em-flag-kz", "/shashlýk/", "blablablablablablablabla", "Nöd eso Vegi", "as", "60 min", "Kazakhstan, Grill", "Shashlik.jpg", "Kazakhstan", [42, 43, 12, 20, 22]),
-  new Rezept(8, "Ramen", "em-flag-jp", "/ramen/", "blablablablablablablabla", "Nöd eso Vegi", "as", "120 min", "Japan, Suppe", "Ramen.jpg", "Japan", [44, 45, 46, 47, 1]),
-  new Rezept(9, "Lachssalat", "em-flag-jp", "/leksseled/", "blablablablablablablabla", "fishyboi", "as", "15 min", "Japan, Salat", "Ramen.jpg", "Japan", [48, 49, 46, 20]),
-  new Rezept(10, "Bauchspeckshecht", "em-de", "/bechspeckshaicht/", "blablablablablablablabla", "fishyboi", "eu", "30 min", "Deutschland, Fisch", "Ramen.jpg", "Japan", [50, 5, 38]),
+var rezepte = [// title,       flag,         subtitle,            description,                      info,                origin,       time,      tags,           imagePath,      country,         zutatenListe,   Art, Anlass
+  new Rezept(1, "Souvlaki mit Tzatziki", "em-flag-gr", "/suvˈlɑ kyɑ/", "blablablablablablablablabla", "Vegetarisch, Ohne Nüsse", "eu", "20 min", "Greek, Fleisch", "souvlaki.jpg", "Griechenland", [17, 18, 19, 20, 21, 22, 23, 16], "grilliert", "KF"),
+  new Rezept(2, "Bockwurst & S-kraut", "em-de", "/'bɔkvʊrst/", "blablablablablablablabla", "Fleischetarisch, mit sehr viel Nüssen", "eu", "20 min", "Deutsch, Fleisch", "gerichtsart.jpg", "Deutschland", [24, 25],"gekocht", "FT"),
+  new Rezept(3, "Saltimbocca", "em-flag-it", "/saltimˈbokka/", "blablablablablablablablabla", "Nicht so Vegi", "eu", "25 min", "Italian, Gebraten, Und so", "bocca.jpg", "Italien", [26, 27, 28, 21], "gebraten", "DP"),
+  new Rezept(4, "Pistache Glace", "em-flag-mx", "/'asdagasfad/", "blablablablablablablabla", "Vegi, mit sehr viel Nüssen", "na", "40 min", "Mexican, Icecream", "dessert.jpg", "Mexico", [29, 30, 31, 32], "gekühlt" ,"CL"),
+  new Rezept(5, "Mezze", "em-flag-tr", "/ˈmɛzeɪ/", "blablablablablablablablabla", "Fleisch undso", "as", "60 min", "Türkei, Fleisch", "mezze.jpg", "Türkei", [33, 34, 35, 36, 37, 32, 18, 20, 14, 6], "gebraten", "DP"),
+  new Rezept(6, "Rösti", "em-flag-ch", "/ˈrəːsti/", "blablablablablablablabla", "Vegi", "eu", "40 min", "Schweiz, Härdöpfel", "rosti.jpg", "Schweiz", [38, 39, 40, 41], "gebraten", "SB"),
+  new Rezept(7, "Shashlik", "em-flag-kz", "/shashlýk/", "blablablablablablablabla", "Nöd eso Vegi", "as", "60 min", "Kazakhstan, Grill", "Shashlik.jpg", "Kazakhstan", [42, 43, 12, 20, 22], "grilliert", "KF"),
+  new Rezept(8, "Ramen", "em-flag-jp", "/ramen/", "blablablablablablablabla", "Nöd eso Vegi", "as", "120 min", "Japan, Suppe", "Ramen.jpg", "Japan", [44, 45, 46, 47, 1], "gekocht", "DP"),
+  new Rezept(9, "Lachssalat", "em-flag-jp", "/leksseled/", "blablablablablablablabla", "fishyboi", "as", "15 min", "Japan, Salat", "Ramen.jpg", "Japan", [48, 49, 46, 20],"gekühlt", "PN"),
+  new Rezept(10, "Bauchspeckshecht", "em-de", "/bechspeckshaicht/", "blablablablablablablabla", "fishyboi", "eu", "30 min", "Deutschland, Fisch", "Ramen.jpg", "Japan", [50, 5, 38], "gebraten", "FT"),
+  new Rezept(11, "Pizza", "em-flag-it", "/ˈpit.tsa/", "blablablablablablablabla", "mit gluten", "eu", "60 min", "Italien, Gluten", "pizza.jpg", "Italien", [16, 36,21,4,5,51,8], "gebacken", "DP"),
+  new Rezept(12, "Cordon Bleu", "em-fr", "/kɔrdõˈbløː/", "blablablablablablablabla", "mit viel käse", "eu", "60 min", "Frankreich, käse", "Cordon_bleu.jpg", "Frankreich", [52,53,31,16], "frittiert", "FT"),
+  new Rezept(13, "Nikuman", "em-flag-jp", "/nikuman/", "blablablablablablablabla", "voll gedämpft undso", "as", "120 min", "Japan", "nikuman.jpg", "Japan", [16,17,12,26,13], "gedaempft", "FT"),
+  new Rezept(14, "Kartoffelsalat", "em-de", "/kartoffelsalat/", "blablablablablablablabla", "totally vegan", "eu", "30 min", "Deutschland, vegan", "salat.jpg", "Deutschland", [38,21,40,41,43], "gekühlt", "PN"),
+  
 ];
 
 function FilterListByProperty(list, key, value) {
@@ -302,7 +309,7 @@ var Zutaten = [ //             veget, vegan, fleisch, fisch, nüsse, gluten, lac
   new Zutat(26, "Salbei", "Salbei", true, true, false, false, false, false, false),
   new Zutat(27, "Kalbsplätzchen", "Kalbsplätzchen", false, false, true, false, false, false, false),
   new Zutat(28, "Rohschinken", "Rohschinken", false, false, true, false, false, false, false),
-  new Zutat(29, "Pistache", "Pistache", true, true, false, false, false, false, false),
+  new Zutat(29, "Pistache", "Pistache", true, true, false, false, true, false, false),
   new Zutat(30, "Zucker", "Zucker", true, true, false, false, false, false, false),
   new Zutat(31, "Ei", "Eier", true, false, false, false, false, false, false),
   new Zutat(32, "Rahm", "Rahm", true, false, false, false, false, false, true),
@@ -324,6 +331,9 @@ var Zutaten = [ //             veget, vegan, fleisch, fisch, nüsse, gluten, lac
   new Zutat(48, "Lachsfilet", "Lachsfilet", false, false, false, true, false, false, false),
   new Zutat(49, "Salat", "Salat", true, true, false, false, false, false, false),
   new Zutat(50, "Hecht", "Hecht", false, false, false, true, false, false, false),
+  new Zutat(51, "Mozzarella", "Mozzarella", true, false, false, false, false, false, true),
+  new Zutat(52, "Pouletbrust", "Pouletbrüste", false, false, true, false, false, false, false),
+  new Zutat(53, "Paniermehl", "Paniermehl", true, false, false, true, false, true, false),
 ];
 
 function RezeptNachIdSuchen(gesuchteId) {

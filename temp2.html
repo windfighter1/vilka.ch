@@ -171,6 +171,7 @@
                         var filteredList = FilterListByProperty(rezepte, filterQS, valueQS);
                         loadRecipes(filteredList);
                     }
+
                 }
 
                 else {
@@ -232,19 +233,6 @@
                     if (pair[0] == variable) { return pair[1]; }
                 }
                 return (false);
-            }
-
-
-            function CallRecipeAPI(SearchId) {
-                // $.ajax({
-                //                         url: "https://api.edamam.com/search?q=" + SearchId + "&app_id=15630df2&app_key=16624c3420140a28ec85b18976bbd138",
-                //                         type: 'GET',
-                //                         success: function (result) {
-                //                            alert(result);
-                //                         }
-                //                     }); 
-
-
             }
 
 

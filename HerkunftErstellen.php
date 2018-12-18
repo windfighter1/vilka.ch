@@ -38,57 +38,28 @@
 
 <body>
   <div class="container">
-  <h1>Zutat erstellen</h1>
+  <h1>Herkunft hinzufügen</h1>
   <div class="row">
-    <form id="primaryform" method="post" action="ZutatErstellen.php">
+    <form id="primaryform" method="post" action="HerkunftErstellen.php">
       <div class="form-group">
-        <label for="Name">Name</label>
-        <input type="text" class="form-control"  name="ZutatName" id="ZutatName" placeholder="Name">
+        <label for="LandName">Land</label>
+        <input type="text" class="form-control"  name="LandName" id="LandName" placeholder="Land">
       </div>
       <div class="form-group">
-        <label for="NamePlural">Name (Mehrzahl)</label>
-        <input type="text" class="form-control"  name="NamePlural" id="NamePlural" placeholder="Name">
+        <label for="LandKuerzel">Kürzel</label>
+        <input type="text" class="form-control"  name="LandKuerzel" id="LandKuerzel" placeholder="Kürzel">
       </div>
-    <div class="form-group form-check">
-      <input class="form-check-input" type="checkbox" name="IsMeat" id="IsMeat">
-      <label class="form-check-label" for="IsMeat">
-        Enthält Fleisch
-      </label>
-  </div>
-  <div class="form-group form-check">
-      <input class="form-check-input" type="checkbox" name="IsFish" id="IsFish">
-      <label class="form-check-label" for="IsFish">
-        Enthält Fisch
-      </label>
-  </div>
-  <div class="form-group form-check">
-      <input class="form-check-input" type="checkbox" name="IsVegetarian" id="IsVegetarian" >
-      <label class="form-check-label" for="IsVegetarian">
-        Ist vegetarisch
-      </label>
-  </div>
-  <div class="form-group form-check">
-      <input class="form-check-input" type="checkbox" name="IsNut" id="IsNut">
-      <label class="form-check-label" for="IsNut">
-        Enthält Nüsse
-      </label>
-  </div>
-  <div class="form-group form-check">
-      <input class="form-check-input" type="checkbox" name="IsGluten" id="IsGluten">
-      <label class="form-check-label" for="IsGluten">
-        Enthält Gluten
-      </label>
-  </div>
-  <div class="form-group form-check">
-      <input class="form-check-input" type="checkbox" name="IsVegan" id="IsVegan" >
-      <label class="form-check-label" for="IsVegan">
-        Ist vegan
-      </label>
-  </div>
-  <div class="form-group form-check">
-    <input class="form-check-input" type="checkbox" name="IsLactose" id="IsLactose">
-    <label class="form-check-label" for="IsLactose">Enthält Laktose</label>
-  </div>
+      <div class="form-group">
+      <label for="LandKontinent">Kontinent:</label>
+      <select class="form-control" id="LandKontinent" name="LandKontinent">
+        <option value="eu" label="Europa">eu</option>
+        <option value="as" label="Asien">as</option>
+        <option value="na" label="Nordamerika">na</option>
+        <option value="sa" label="Südamerika">sa</option>
+        <option value="af" label="Afrika">af</option>
+        <option value="au" label="Australia">au</option>
+      </select>
+      </div>
   <button type="submit" id="submit" name="submit" style="margin-top: 2em;" class="btn btn-primary">Submit</button>
 </form>
 </div>
@@ -112,18 +83,12 @@ function saveToDb()
       $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
       // set the PDO error mode to exception
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $name = $_POST['ZutatName'];
-      $namePlural = $_POST['NamePlural'];
-      $IsFish = isset($_POST['IsFish']);
-      $IsGluten = isset($_POST['IsGluten']);
-      $IsLactose = isset($_POST['IsLactose']);
-      $IsMeat = isset($_POST['IsMeat']);
-      $IsNut = isset($_POST['IsNut']);
-      $IsVegan = isset($_POST['IsVegan']);
-      $IsVegetarian = isset($_POST['IsVegetarian']);
-      $sql = "INSERT INTO zutat (Name, NamePlural, IsFish,IsMeat,IsNut,IsLactose,IsGluten,IsVegetarian,IsVegan) 
-      VALUES (?,?,?,?,?,?,?,?,?)";
-      $conn->prepare($sql)->execute([$name,$namePlural,$IsFish,$IsMeat,$IsNut,$IsLactose,$IsGluten,$IsVegetarian,$IsVegan]);
+      $name = $_POST['LandName'];
+      $kuerzel = $_POST['LandKuerzel'];
+      $kontinent = $_POST['LandKontinent'];
+      $sql = "INSERT INTO herkunft (Land, Kuerzel, Kontinent) 
+      VALUES (?,?,?)";
+      $conn->prepare($sql)->execute([$name,$kuerzel,$kontinent]);
       $insertSuccess = true;
     }
 catch(PDOException $e)

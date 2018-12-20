@@ -32,7 +32,21 @@
 
 <body>
 
-  
+  <script>
+    function addZutat() {
+      var amount = $("#RezeptAnzahl").val();
+      var unit = $("#RezeptEinheit").val();
+      var ingredient = $("#RezeptZutat").val();
+      $.ajax({
+           type: "POST",
+           url: 'handler.php',
+           data:{action:'addZutat', einheit:unit, number:amount,zutat:ingredient},
+           success:function(html) {
+             $("#ingredienttable").append(html);
+           }
+      });
+ }
+  </script>
 
   <!-- Marketing messaging and featurettes
       ================================================== -->
@@ -56,6 +70,95 @@
     <label for="RezeptPhonetisch">Phonetisch</label>
     <input type="text" class="form-control" name="RezeptPhonetisch" id="RezeptPhonetisch" placeholder="Phonetisch">
   </div>
+  <div class="form-group">
+      <label for="RezeptAnlass">Anlass:</label>
+      <select class="form-control" id="RezeptAnlass" name="RezeptAnlass">
+        <option value="ft" label="Festtage">Festtage</option>
+        <option value="cl" label="CandleLight">CandleLight</option>
+        <option value="dp" label="Dinner Party">Dinner Party</option>
+        <option value="pn" label="Picnic">Picnic</option>
+        <option value="kf" label="Kochen im Freien">Kochen im Freien</option>
+        <option value="sb" label="Sonntagsbrunch">Sonntagsbrunch</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="RezeptHerkunft">Herkunft:</label>
+      <select class="form-control" id="RezeptHerkunft" name="RezeptHerkunft">
+      <?php 
+        $servername = "178.192.53.57:3306";
+        $username = "selim_db";
+        $password = "oggefuess2791";
+        $dbname = "vilkadb";
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $stmt = $conn->query("Select * from herkunft");
+        while ($row = $stmt->fetch()) {
+          echo "<option value='".$row['ID_Herkunft']."' label='".$row['Land']."'>".$row['Land']."</option>";
+        }
+      ?>
+      </select>
+    </div>
+    
+    <div class="form-row" style="border:1px black solid; padding:1em;">
+    <div class="form-group col-md-3">
+    <label for="RezeptAnzahl">Anzahl</label>
+    <input type="text" class="form-control" name="RezeptAnzahl" id="RezeptAnzahl" placeholder="Anzahl">
+  </div>
+      <div class="form-group col-md-3">
+        <label for="RezeptEinheit">Einheit</label>
+        <select class="form-control" id="RezeptEinheit" name="RezeptEinheit">
+        <?php 
+          $servername = "178.192.53.57:3306";
+          $username = "selim_db";
+          $password = "oggefuess2791";
+          $dbname = "vilkadb";
+          $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+          $stmt = $conn->query("Select * from einheiten");
+          while ($row = $stmt->fetch()) {
+            echo "<option value='".$row['ID_Einheit']."' label='".$row['Einheit']."'>".$row['Einheit']."</option>";
+          }
+        ?>
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="RezeptZutat">Zutat:</label>
+        <select class="form-control" id="RezeptZutat" name="RezeptZutat">
+        <?php 
+          $servername = "178.192.53.57:3306";
+          $username = "selim_db";
+          $password = "oggefuess2791";
+          $dbname = "vilkadb";
+          $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+          $stmt = $conn->query("Select * from zutat");
+          while ($row = $stmt->fetch()) {
+            echo "<option value='".$row['ID_Zutat']."' label='".$row['Name']."'>".$row['Name']."</option>";
+          }
+        ?>
+        </select>
+      </div>
+      <div class="form-group  col-md-3">
+      <a class="btn btn-large btn-secondary" name="ZutatHinzufuegen" onClick="addZutat()" id="ZutatHinzufuegen" href="#">hinzufügen</a>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12" id="ingredienttable" style="border:1px black solid; padding:1em;">
+        <input type="text" readonly class="form-control-plaintext" id="KeineZutatPlatzhalter" value="Es wurden noch keine Zutaten hinzugefügt.">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="RezeptZeit">Zeit (in Minuten)</label>
+      <input type="number" class="form-control" name="RezeptZeit" id="RezeptZeit" placeholder="Zeit">
+  </div>
+  <div class="form-group">
+      <label for="RezeptArt">Zubereitungsart:</label>
+      <select class="form-control" id="RezeptArt" name="RezeptArt">
+        <option>Gedämpft</option>
+        <option>Gebraten</option>
+        <option>Gebacken</option>
+        <option>Frittiert</option>
+        <option>Grilliert</option>
+        <option>Gekocht</option>
+      </select>
+    </div>
   <button type="submit" name="submit" class="btn btn-primary">Submit</button>
 </form>
 </div>
@@ -65,7 +168,10 @@ if(isset($_POST['submit']))
 {
   echo "isclicked";
    $success = saveToDb();
+   if($success)
+   {
    echo "<script>location.href='Admin.html';</script>";
+   }
 }
 function saveToDb()
 {
@@ -82,9 +188,13 @@ function saveToDb()
       $beschreibung = $_POST['RezeptBeschreibung'];
       $phonetisch = $_POST['RezeptPhonetisch'];
       $bild = $_POST['RezeptBild'];
-      $sql = "INSERT INTO rezept (Herkunft_ID,Name,Bild,Beschreibung,Phonetisch) 
-      VALUES (?,?,?,?,?)";
-      // $conn->prepare($sql)->execute([1,$name,$bild,$beschreibung,$phonetisch]);
+      $anlass = $_POST['RezeptAnlass'];
+      $herkunft = $_POST['RezeptHerkunft'];
+      $zeit = $_POST['RezeptZeit'];
+      $art = $_POST['RezeptArt'];
+      $sql = "INSERT INTO rezept (Herkunft_Id,Name,Bild,Beschreibung,Phonetisch,Anlass,Zeit,Zubereitung) 
+      VALUES (?,?,?,?,?,?,?,?)";
+       $conn->prepare($sql)->execute([$herkunft,$name,$bild,$beschreibung,$phonetisch,$anlass,$zeit,$art]);
       $insertSuccess = true;
     }
 catch(PDOException $e)

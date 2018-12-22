@@ -37,15 +37,25 @@
       var amount = $("#RezeptAnzahl").val();
       var unit = $("#RezeptEinheit").val();
       var ingredient = $("#RezeptZutat").val();
+      var connected = amount + ";" + unit + ";" + ingredient;
+      if($("#addedIngredients").val() == "")
+      {
+        $("#addedIngredients").val(connected);
+      }
+      else
+      {
+        $("#addedIngredients").val($("#addedIngredients").val() + "|" + connected);
+      }
       $.ajax({
            type: "POST",
            url: 'handler.php',
            data:{action:'addZutat', einheit:unit, number:amount,zutat:ingredient},
-           success:function(html) {
-             $("#ingredienttable").append(html);
+           success:function(data) {
+             $("#KeineZutatPlatzhalter").hide();
+             $("#ingredienttable").append(data);
            }
       });
- }
+    }
   </script>
 
   <!-- Marketing messaging and featurettes
@@ -159,6 +169,7 @@
         <option>Gekocht</option>
       </select>
     </div>
+    <input type="hidden" value="" name="addedIngredients" id="addedIngredients"/>
   <button type="submit" name="submit" class="btn btn-primary">Submit</button>
 </form>
 </div>
@@ -194,7 +205,22 @@ function saveToDb()
       $art = $_POST['RezeptArt'];
       $sql = "INSERT INTO rezept (Herkunft_Id,Name,Bild,Beschreibung,Phonetisch,Anlass,Zeit,Zubereitung) 
       VALUES (?,?,?,?,?,?,?,?)";
-       $conn->prepare($sql)->execute([$herkunft,$name,$bild,$beschreibung,$phonetisch,$anlass,$zeit,$art]);
+      $conn->prepare($sql)->execute([$herkunft,$name,$bild,$beschreibung,$phonetisch,$anlass,$zeit,$art]);
+      $id = $conn->lastInsertId();
+      $ingr_strings = $_POST['addedIngredients'];
+      $ingredientArray = explode("|", $ingr_strings);
+      if(sizeof($ingredientArray) > 0)
+      {
+        foreach($ingredientArray as $ingr)
+        {
+          $id_array =explode(";",$ingr);
+          $amount_ingredient = $id_array[0];
+          $id_unit = $id_array[1]; 
+          $id_ingredient = $id_array[2];
+          $sql = "INSERT INTO rezept_zutat (Rezept_ID,Zutat_ID,Einheit_ID,Anzahl) VALUES (?,?,?,?)";
+          $conn->prepare($sql)->execute([$id,$id_ingredient,$id_unit,$amount_ingredient]);
+        }
+      }
       $insertSuccess = true;
     }
 catch(PDOException $e)
@@ -204,6 +230,25 @@ catch(PDOException $e)
     }
     $conn = null;
     return $insertSuccess;
+}
+function addZutat($amount,$unit,$ingredient)
+{
+  $servername = "178.192.53.57:3306";
+    $username = "selim_db";
+    $password = "oggefuess2791";
+    $dbname = "vilkadb";
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+
+    $stmt = $conn->prepare("SELECT Einheit FROM einheiten WHERE ID_Einheit=$unit LIMIT 1"); 
+    $stmt->execute(); 
+    $unit_Name = $stmt->fetch();
+    $unit_Name = implode("",$unit_Name);
+    
+    $stmt = $conn->prepare("SELECT Name FROM zutat WHERE ID_Zutat=$ingredient LIMIT 1"); 
+    $stmt->execute(); 
+    $ingredient_Name = $stmt->fetch();
+    $ingredient_Name = implode("",$ingredient_Name);
+    return "<input type='text' readonly class='form-control-plaintext' value='".$amount." ".$unit_Name." ".$ingredient_Name."'>";
 }
 ?>
 </div>

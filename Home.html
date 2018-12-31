@@ -73,10 +73,10 @@
               <a class="dropdown-item" href="Kategorien/Drinks_&_Desserts.html">Drinks & Desserts</a>
             </div>
           </li>
-          <li class="nav-item">
-            <button id="btnLogin" data-toggle="modal" data-target="#myModal" type="button1" class="btn btn-sm btn-outline-light">Registrieren / Anmelden</button>
 
-          </li>
+          <a class="nav-link" href="#">About
+            <span class="sr-only">(current)</span>
+          </a>
 
           <!-- searchRecipe -->
 
@@ -208,7 +208,7 @@
 
     <div class="row featurette">
       <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading">Morgens immer Müde?
+        <h2 class="featurette-heading">Morgens Müde?
           <span class="text-muted"> Hier sind 4 Rezepte um dich Wach zu rütteln.</span>
         </h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo
@@ -243,9 +243,14 @@
     <hr class="featurette-divider">
     <!-- /END THE FEATURETTES -->
 
-    <h1 style="text-align:center">Unser Team</h2>
+    <h1 style="text-align:center">VILKA</h2>
 
       <hr class="featurette-divider">
+
+      <p>Vilka oder вилка (kyrillisch) bedeutet auf Russisch Gabel. Als Rezepteseite mit Erweiterter Suche hat Vilka das Ziel
+        einem bei der Entscheidung zu helfen: «Was koche ich heute?».
+      </p>
+<br><br> <br>
 
       <div class="row">
 
@@ -275,111 +280,20 @@
       </div>
       <!-- /.row -->
 
+      <hr class="featurette-divider">
+
+      <h1 style="text-align:center">Über Mich</h2>
+
+        <hr class="featurette-divider">
+
+
+
+
   </div>
   <!-- /.container -->
 
 
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
 
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div class="form">
-
-            <ul class="tab-group">
-
-              <li class="tab active">
-                <a href="#signup">Sign Up</a>
-              </li>
-              <li class="tab">
-                <a href="#login">Log In</a>
-              </li>
-            </ul>
-
-            <div class="tab-content">
-              <div id="signup">
-                <h1>Sign Up for Free</h1>
-
-                <form action="/" method="post">
-
-                  <div class="top-row">
-                    <div class="field-wrap">
-                      <label>
-                        First Name
-                        <span class="req">*</span>
-                      </label>
-                      <input type="text" required autocomplete="off" />
-                    </div>
-
-                    <div class="field-wrap">
-                      <label>
-                        Last Name
-                        <span class="req">*</span>
-                      </label>
-                      <input type="text" required autocomplete="off" />
-                    </div>
-                  </div>
-
-                  <div class="field-wrap">
-                    <label>
-                      Email Address
-                      <span class="req">*</span>
-                    </label>
-                    <input type="email" required autocomplete="off" />
-                  </div>
-
-                  <div class="field-wrap">
-                    <label>
-                      Set A Password
-                      <span class="req">*</span>
-                    </label>
-                    <input type="password" required autocomplete="off" />
-                  </div>
-
-                  <button type="submit" class="button button-block" />Get Started</button>
-
-                </form>
-
-              </div>
-
-              <div id="login">
-                <h1>Welcome Back!</h1>
-
-                <form action="/" method="post">
-
-                  <div class="field-wrap">
-                    <label>
-                      Email Address
-                      <span class="req">*</span>
-                    </label>
-                    <input type="email" required autocomplete="off" />
-                  </div>
-
-                  <div class="field-wrap">
-                    <label>
-                      Password
-                      <span class="req">*</span>
-                    </label>
-                    <input type="password" required autocomplete="off" />
-                  </div>
-
-                  <p class="forgot">
-                    <a href="#">Forgot Password?</a>
-                  </p>
-                  <button class="button button-block" />Log In</button>
-                </form>
-              </div>
-            </div>
-            <!-- /form -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!--Footer-->
   <footer class="page-footer">
@@ -438,62 +352,9 @@
   <!--/.Footer-->
 
   <script>
-/*yscroll für modal*/
-$('#btnLogin').on('click', function(e){
-    var modalDialog = $('#myModal .modal-dialog');
-    var yScrollOffset = window.pageYOffset;
-    modalDialog.css('top', yScrollOffset);
-  });
-
-
-/*modal*/
-$('.form').find('input, textarea').on('keyup blur focus', function (e) {
-
-var $this = $(this),
-  label = $this.prev('label');
-
-if (e.type === 'keyup') {
-  if ($this.val() === '') {
-    label.removeClass('active highlight');
-  } else {
-    label.addClass('active highlight');
-  }
-} else if (e.type === 'blur') {
-  if ($this.val() === '') {
-    label.removeClass('active highlight');
-  } else {
-    label.removeClass('highlight');
-  }
-} else if (e.type === 'focus') {
-
-  if ($this.val() === '') {
-    label.removeClass('highlight');
-  }
-  else if ($this.val() !== '') {
-    label.addClass('highlight');
-  }
-}
-
-});
-
-$('.tab a').on('click', function (e) {
-
-e.preventDefault();
-
-$(this).parent().addClass('active');
-$(this).parent().siblings().removeClass('active');
-
-target = $(this).attr('href');
-
-$('.tab-content > div').not(target).hide();
-
-$(target).fadeIn(600);
-
-});
-
 
     autocomplete(document.getElementById("searchRecipe"), rezepte);
- 
+
   </script>
 </body>
 

@@ -1,3 +1,18 @@
+<?php
+function getQueryString($queryName)
+{
+  //https://stackoverflow.com/a/6768831
+  $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+  $parts = parse_url($url);
+  parse_str($parts['query'], $query);
+  return $query[$queryName];
+}
+$key = getQueryString("key");
+if ($key != "w9e487epw")
+{
+  echo "<script>location.href='Home.html';</script>";
+}
+?>
 <!doctype html>
 
 <head>
@@ -34,13 +49,13 @@
     <div class="container">
         <h1>Adminbereich VILKA.CH</h1>
       <div class="row" style="margin-top:2em;">
-        <a class="btn btn-large btn-info" href="RezeptErstellen.php">Neues Rezept</a>
+        <a class="btn btn-large btn-info" href="RezeptErstellen.php?<?php echo $_SERVER['QUERY_STRING']?>">Neues Rezept</a>
       </div>
       <div class="row" style="margin-top:2em;">
-        <a class="btn btn-large btn-info" href="ZutatErstellen.php">Neue Zutat</a>
+        <a class="btn btn-large btn-info" href="ZutatErstellen.php?<?php echo $_SERVER['QUERY_STRING']?>">Neue Zutat</a>
     </div>
     <div class="row" style="margin-top:2em;">
-            <a class="btn btn-large btn-info" href="HerkunftErstellen.php">Neue Herkunft</a>
+            <a class="btn btn-large btn-info" href="HerkunftErstellen.php?<?php echo $_SERVER['QUERY_STRING']?>">Neue Herkunft</a>
     </div>
     </div>
   <!-- /.container -->

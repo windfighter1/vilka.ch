@@ -172,7 +172,7 @@ catch(PDOException $e)
 
       <div class="row">
         <div class="column">
-          <img id="bild" src="<?php echo $Bildpfad ?>">
+          <img id="bild" src="img/Rezepte/RealRecipes/<?php echo $Bildpfad ?>">
         </div>
         <div class="column2">
           <h1 id="title"><?php echo $Name?></h1>

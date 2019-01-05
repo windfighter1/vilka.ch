@@ -1,3 +1,18 @@
+<?php
+function getQueryString($queryName)
+{
+  //https://stackoverflow.com/a/6768831
+  $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+  $parts = parse_url($url);
+  parse_str($parts['query'], $query);
+  return $query[$queryName];
+}
+$key = getQueryString("key");
+if ($key != "w9e487epw")
+{
+  echo "<script>location.href='Home.html';</script>";
+}
+?>
 <!doctype html>
 
 <head>
@@ -98,7 +113,7 @@ if(isset($_POST['submit']))
   $success = saveToDb();
   if($success)
   {
-    echo "<script>location.href='admin.html';</script>";
+    echo "<script>location.href='admin.php?".$_SERVER['QUERY_STRING']."';</script>";;
   }
 }
 function saveToDb()

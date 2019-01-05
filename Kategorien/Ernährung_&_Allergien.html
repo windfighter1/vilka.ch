@@ -52,9 +52,6 @@
                     </div> <span class="sr-only">(current)</span>
                     </li>
             <li class="nav-item">
-                    <button id="btnLogin" data-toggle="modal" data-target="#myModal" type="button1" class="btn btn-sm btn-outline-light">Registrieren / Anmelden</button>
-            </li>
-            <li class="nav-item">
                 <div class= "container2">
                     <div class="search-box">
                       <input type="text">
@@ -142,14 +139,5 @@
       
       </footer>
       <!--/.Footer-->
-
-      <script>
-            /*yscroll für modal*/
-            $('#btnLogin').on('click', function (e) {
-                var modalDialog = $('#myModal .modal-dialog');
-                var yScrollOffset = window.pageYOffset;
-                modalDialog.css('top', yScrollOffset);
-            });
-        </script>
   </body>
 </html>

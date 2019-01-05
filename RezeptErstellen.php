@@ -203,7 +203,7 @@ if(isset($_POST['submit']))
    $success = saveToDb();
    if($success)
    {
-    echo "<script>location.href='admin.php?".$_SERVER['QUERY_STRING']."';</script>";
+    echo "<script>location.href='admin.php?".$_SERVER['QUERY_STRING']."'</script>";
    }
 }
 function saveToDb()

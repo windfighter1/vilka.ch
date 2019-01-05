@@ -113,7 +113,7 @@ if(isset($_POST['submit']))
   $success = saveToDb();
   if($success)
   {
-    echo "<script>location.href='admin.php?".$_SERVER['QUERY_STRING']."';</script>";;
+    echo "<script>location.href='admin.php?".$_SERVER['QUERY_STRING']."'</script>";
   }
 }
 function saveToDb()
@@ -122,6 +122,7 @@ function saveToDb()
   $username = "selim_db";
   $password = "oggefuess2791";
   $dbname = "vilkadb";
+  
   
   try {
       $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

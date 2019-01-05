@@ -98,7 +98,7 @@ if(isset($_POST['submit']))
   $success = saveToDb();
   if($success)
   {
-    echo "<script>location.href='Admin.html';</script>";
+    echo "<script>location.href='admin.html';</script>";
   }
 }
 function saveToDb()

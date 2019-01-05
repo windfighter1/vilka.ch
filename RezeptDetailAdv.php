@@ -10,16 +10,12 @@ function getQueryString($queryName)
 
 function getValueByKey($InitialArray,$SearchKey,$SearchValue,$ReturnKey)
 {
-  echo"<p>Key:".$SearchKey." Value:".$SearchValue."</p>";
   foreach($InitialArray as $row){
-    if ($row[$SearchKey] = $SearchValue);
+    if ($row[$SearchKey] == $SearchValue)
     {
-      //echo "<p><b> Return:".$row[$ReturnKey]."</b></p>";
-      $match = $row[$ReturnKey];
+      return $row[$ReturnKey];
     }
   }
-  return $match;
-  
 }
 
 $recipe_id = getQueryString("id");
@@ -42,8 +38,10 @@ $recipe_id = getQueryString("id");
       $Phonetisch = $row->Phonetisch;
       $Anlass = $row->Anlass;
       $Zeit = $row->Zeit;
-      $Zubereitung = $row->Zubereitung;
+      $Art = $row->Zubereitung;
       $Herkunft = $row->Herkunft_ID;
+      $Portion = $row->Portionen;
+      $Zubereitung = $row->Vorgang;
 
       $sql = "SELECT * from herkunft where ID_Herkunft =".$Herkunft;
       $stmt = $conn->query($sql); 
@@ -58,7 +56,6 @@ $recipe_id = getQueryString("id");
       $sql = "SELECT * from zutat";
       $stmt = $conn->query($sql); 
       $allIngredients =$stmt->fetchAll();
-      print_r($allIngredients);
 
       $sql = "SELECT * from einheiten";
       $stmt = $conn->query($sql); 
@@ -185,7 +182,7 @@ catch(PDOException $e)
           <hr class="featurette-divider">
           <h6>
             <i class="fa fa-info-circle"></i>
-            <span id="info"></span>
+            <span id="info"><?php echo $Portion." Portion(en)" ?></span>
           </h6>
           <h6>
             <i class="fa fa-globe"></i>
@@ -215,6 +212,7 @@ catch(PDOException $e)
       </div>
       <div class="column2">
         <h2>Zubereitung</h2>
+        <?php echo "<p class=''>".$Zubereitung."</p>"?>
       </div>
       <div class="row">
 

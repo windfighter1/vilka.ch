@@ -74,7 +74,11 @@
   </div>
   <div class="form-group">
     <label for="RezeptBeschreibung">Beschreibung</label>
-    <input type="text" class="form-control" name="RezeptBeschreibung" id="RezeptBeschreibung" placeholder="Beschreibung">
+    <textarea class="form-control" rows="7" name="RezeptBeschreibung" id="RezeptBeschreibung" placeholder="Beschreibung"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="RezeptZubereitung">Zubereitung</label>
+    <textarea class="form-control" rows="7" name="RezeptZubereitung" id="RezeptZubereitung" placeholder="Zubereitung"></textarea>
   </div>
   <div class="form-group">
     <label for="RezeptPhonetisch">Phonetisch</label>
@@ -159,6 +163,10 @@
       <input type="number" class="form-control" name="RezeptZeit" id="RezeptZeit" placeholder="Zeit">
   </div>
   <div class="form-group">
+      <label for="RezeptPortion">Portion</label>
+      <input type="number" class="form-control" name="RezeptPortion" id="RezeptPortion" placeholder="Portion">
+  </div>
+  <div class="form-group">
       <label for="RezeptArt">Zubereitungsart:</label>
       <select class="form-control" id="RezeptArt" name="RezeptArt">
         <option>Gedämpft</option>
@@ -197,15 +205,17 @@ function saveToDb()
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $name = $_POST['RezeptName'];
       $beschreibung = $_POST['RezeptBeschreibung'];
+      $zubereitung = $_POST['RezeptZubereitung'];
       $phonetisch = $_POST['RezeptPhonetisch'];
       $bild = $_POST['RezeptBild'];
       $anlass = $_POST['RezeptAnlass'];
       $herkunft = $_POST['RezeptHerkunft'];
       $zeit = $_POST['RezeptZeit'];
       $art = $_POST['RezeptArt'];
-      $sql = "INSERT INTO rezept (Herkunft_Id,Name,Bild,Beschreibung,Phonetisch,Anlass,Zeit,Zubereitung) 
-      VALUES (?,?,?,?,?,?,?,?)";
-      $conn->prepare($sql)->execute([$herkunft,$name,$bild,$beschreibung,$phonetisch,$anlass,$zeit,$art]);
+      $portion = $_POST['RezeptPortion'];
+      $sql = "INSERT INTO rezept (Herkunft_Id,Name,Bild,Beschreibung,Phonetisch,Anlass,Zeit,Zubereitung,Vorgang,Portionen) 
+      VALUES (?,?,?,?,?,?,?,?,?,?)";
+      $conn->prepare($sql)->execute([$herkunft,$name,$bild,$beschreibung,$phonetisch,$anlass,$zeit,$art,$zubereitung,$portion]);
       $id = $conn->lastInsertId();
       $ingr_strings = $_POST['addedIngredients'];
       $ingredientArray = explode("|", $ingr_strings);

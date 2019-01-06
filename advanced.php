@@ -14,13 +14,15 @@ function ConnectToDB()
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+  
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
     crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
     crossorigin="anonymous">
   <link rel="stylesheet" href="css/+suche.css">
+  <link rel="stylesheet" href="css/Rezepteseite.css">
   <script src="scripts/main.js"></script>
 
 
@@ -135,7 +137,7 @@ function ConnectToDB()
                 <ul>
                   <li>
                     <a href="#" class="small" data-value="test" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Test</a>
+                      <input type="checkbox" name="" />&nbsp;Test</a>
                   </li>
                   <div class="dropdown-divider"></div>
                 </ul>
@@ -290,21 +292,34 @@ function ConnectToDB()
      <?php 
      if(isset($_POST['SubmitForm']))
       {
+        $recipesList = [];
         $IngredientIds = $_POST["ChosenIngredients"];
         $conn = ConnectToDB();
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "SELECT Rezept_ID from rezept_zutat WHERE Zutat_ID IN (".$IngredientIds.")";
+        $sql = "SELECT * from rezept_zutat WHERE Zutat_ID IN (".$IngredientIds.")";
         $stmt = $conn->query($sql);
         $recipes = $stmt->fetchAll();
-        if($recipes == NULL)
+       
+        $IngredientIdArr = explode(",",$IngredientIds);
+        foreach($recipes as $row)
+        {
+          array_push($recipesList,$row["Rezept_ID"]);
+        }
+        if(count($IngredientIdArr) > 1)
+        {
+          $counts = array_count_values($recipesList);
+          foreach($recipesList as $recipe)
+          {
+            if($counts[$recipe] < count($IngredientIdArr))
+            {
+              $recipesList = array_diff($recipesList,[$recipe]);
+            }
+          }
+        }
+        if($recipes == NULL || $recipesList == NULL || $recipesList == [])
         {
           echo "<p>Keine Gerichte gefunden</p>";
           exit;
-        }
-        $recipesList = [];
-        foreach($recipes as $row)
-        {
-            array_push($recipesList,$row["Rezept_ID"]);
         }
         $recipesImploded = implode(",",$recipesList);
         $sql = "SELECT ID_Rezept,Name,Phonetisch,Herkunft_ID,Bild,Zeit,Portionen from rezept WHERE ID_Rezept IN (".$recipesImploded.")";
@@ -321,13 +336,13 @@ function ConnectToDB()
         //for ($i = 0; $i < $length; $i++) {
         foreach($recipesFull as $recipeSingle)
         {
-          $sql = "SELECT * from herkunft WHERE ID_Herkunft = ".$recipeSingle["ID_Rezept"];
+          $sql = "SELECT * from herkunft WHERE ID_Herkunft = ".$recipeSingle["Herkunft_ID"];
           $stmt = $conn->query($sql);
           $row = $stmt->fetchObject();
           $Kuerzel = $row->Kuerzel;
           echo "<div class='column'><a href='RezeptDetailAdv.php?id=".$recipeSingle["ID_Rezept"]."'>";
           echo "<div class='img_container'><img src='img/Rezepte/RealRecipes/".$recipeSingle["Bild"]."'></div>";
-          echo "<div class='teaser__inner'><h3>".$recipeSingle["Name"]."<i class='em ".$Kuerzel."'></i></h3><h6 class='thin'><i>".$recipeSingle["Phonetisch"]."</i></h6><br><h6><i class='fa fa-info-circle'></i>".$recipeSingle["Portionen"] ." Portionen</h6><h6><i class='fa fa-clock-o'></i> ".$recipeSingle["Zeit"]." min</h6></div>";
+          echo "<div class='teaser__inner'><h3>".$recipeSingle["Name"]." <i class='em ".$Kuerzel."'></i></h3><h6 class='thin'><i>".$recipeSingle["Phonetisch"]."</i></h6><br><h6><i class='fa fa-info-circle'></i>".$recipeSingle["Portionen"] ." Portionen</h6><h6><i class='fa fa-clock-o'></i> ".$recipeSingle["Zeit"]." min</h6></div>";
           echo "</a></div>";
         }
         echo "</div>";

@@ -105,18 +105,25 @@ function ConnectToDB()
 
       <h1>Erweiterte Suche</h1>
 
-      <form autocomplete="off" action="temp2.html">
+      <!--<form autocomplete="off" disable>
         <div class="input-group">
           <div class="input-group mb-3">
             <input type="text" id="tokenfield-typeahead" placeholder="Nach Zutaten suchen..." aria-describedby="button-addon2">
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" id="button-addon2">Suchen</button>
             </div>
           </div>
         </div>
+      </form>-->
+
+      <form id="primaryform" method="post" action="advanced.php">
+      <input type="text" id="tokenfield-typeahead" placeholder="Nach Zutaten suchen..." aria-describedby="button-addon2">
+        <div class="input-group">
+            <div class="input-group mb-3">
+              <input type="hidden" id="ChosenIngredients" name="ChosenIngredients"/>
+              <button type="submit" name="SubmitForm" class="btn" id="button-addon2">Suchen</button>
+            </div>
+        </div>    
       </form>
-
-
 
     </div>
     <div class ="search_option_container">
@@ -131,11 +138,6 @@ function ConnectToDB()
                       <input type="checkbox" />&nbsp;Test</a>
                   </li>
                   <div class="dropdown-divider"></div>
-                  <?php
-                  $db = ConnectToDB();
-                  
-                  ?>
-                  
                 </ul>
               </div>
             </li>
@@ -284,14 +286,80 @@ function ConnectToDB()
 
 
     </div>
-  </div>
+    <div class="result row">
+     <?php 
+     if(isset($_POST['SubmitForm']))
+      {
+        $IngredientIds = $_POST["ChosenIngredients"];
+        $conn = ConnectToDB();
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT Rezept_ID from rezept_zutat WHERE Zutat_ID IN (".$IngredientIds.")";
+        $stmt = $conn->query($sql);
+        $recipes = $stmt->fetchAll();
+        if($recipes == NULL)
+        {
+          echo "<p>Keine Gerichte gefunden</p>";
+          exit;
+        }
+        $recipesList = [];
+        foreach($recipes as $row)
+        {
+            array_push($recipesList,$row["Rezept_ID"]);
+        }
+        $recipesImploded = implode(",",$recipesList);
+        $sql = "SELECT ID_Rezept,Name,Phonetisch,Herkunft_ID,Bild,Zeit,Portionen from rezept WHERE ID_Rezept IN (".$recipesImploded.")";
+        $stmt = $conn->query($sql);
+        $recipesFull = $stmt->fetchAll();
 
+        if($recipesFull == NULL)
+        {
+          echo "<p>Keine Gerichte gefunden</p>";
+          exit;
+        }
+        $length = count($recipesFull);
+        echo "<div class='row'>";
+        //for ($i = 0; $i < $length; $i++) {
+        foreach($recipesFull as $recipeSingle)
+        {
+          $sql = "SELECT * from herkunft WHERE ID_Herkunft = ".$recipeSingle["ID_Rezept"];
+          $stmt = $conn->query($sql);
+          $row = $stmt->fetchObject();
+          $Kuerzel = $row->Kuerzel;
+          echo "<div class='column'><a href='RezeptDetailAdv.php?id=".$recipeSingle["ID_Rezept"]."'>";
+          echo "<div class='img_container'><img src='img/Rezepte/RealRecipes/".$recipeSingle["Bild"]."'></div>";
+          echo "<div class='teaser__inner'><h3>".$recipeSingle["Name"]."<i class='em ".$Kuerzel."'></i></h3><h6 class='thin'><i>".$recipeSingle["Phonetisch"]."</i></h6><br><h6><i class='fa fa-info-circle'></i>".$recipeSingle["Portionen"] ." Portionen</h6><h6><i class='fa fa-clock-o'></i> ".$recipeSingle["Zeit"]." min</h6></div>";
+          echo "</a></div>";
+        }
+        echo "</div>";
+      }
+    ?>
+      </div>
+  </div>
+  <?php
+      $db = ConnectToDB();
+      try {
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT * from zutat";
+        $stmt = $db->query($sql);
+        $rows = $stmt->fetchAll();
+        $ingredientSource = [];
+        $ingredientString;
+        foreach($rows as $row)
+        {
+          array_push($ingredientSource,"{value:'".$row["Name"]."',label:'".$row["ID_Zutat"]."'}");
+        }
+        $ingredientString = "[".implode(",",$ingredientSource)."]";
+      }
+      catch(PDOException $e)
+      {
+
+      }            
+    ?>
    <script type="text/javascript">
 
     $(document).ready(function () {
-      var prediction = ZutatNachNameSuchen("");
       var engine = new Bloodhound({
-        local: prediction,
+        local: <?php echo $ingredientString ?>,
         datumTokenizer: function (d) {
           return Bloodhound.tokenizers.whitespace(d.value);
         },
@@ -302,9 +370,36 @@ function ConnectToDB()
 
       $('#tokenfield-typeahead').tokenfield({
         typeahead: [null, {
-          source: engine.ttAdapter()
+          source:engine.ttAdapter()
         }]
       });
+
+      $('#tokenfield-typeahead')
+      //event, wird vor dem löschen eines tokens aufgerufen
+      .on('tokenfield:createdtoken', function (e) {
+        var id = e.relatedTarget.firstChild.innerHTML;
+        var name = e.relatedTarget.getAttribute("data-value");
+        e.relatedTarget.firstChild.innerHTML = name;
+        e.relatedTarget.setAttribute("data-value",id);
+        var hiddenValue = $("#ChosenIngredients").val();
+        if(hiddenValue)
+        {
+          $("#ChosenIngredients").val(hiddenValue+","+id);
+        } 
+        else
+        {
+          $("#ChosenIngredients").val(id);
+        }      
+        });
+        //event, wird vor dem löschen eines tokens aufgerufen
+        $('#tokenfield-typeahead').on("tokenfield:removetoken",function (e){
+          var id = e.relatedTarget.getAttribute("data-value");
+          var allIngredientIds = $("#ChosenIngredients").val();
+          var allIngredientArray = allIngredientIds.split(",");
+          var deleteindex = allIngredientArray.indexOf(id);
+          if (deleteindex !== -1) allIngredientArray.splice(deleteindex, 1);
+          $("#ChosenIngredients").val(allIngredientArray.join(","));
+        });
     });
 
     //<--Dropdown Checkbox -->

@@ -202,7 +202,8 @@ catch(PDOException $e)
 
       </div>
       <hr class="featurette-divider">
-      <div class="column1">
+      <div class="row">
+      <div class="column col-md-6">
         <h2>Zutaten</h2>
         <?php
           foreach($IngredientArray as $ingredient) {
@@ -210,12 +211,10 @@ catch(PDOException $e)
           }
         ?>
       </div>
-      <div class="column2">
+      <div class="column col-md-6">
         <h2>Zubereitung</h2>
         <?php echo "<p class=''>".$Zubereitung."</p>"?>
       </div>
-      <div class="row">
-
       </div>
     </div>
   </div>

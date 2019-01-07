@@ -226,10 +226,13 @@ function autocomplete(inp, arr) {
       /*check if the item starts with the same letters as the text field value:*/
       if (arr[i].title.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
         /*create a DIV element for each matching element:*/
+        var anchor = document.createElement("a");
+        anchor.setAttribute("href","RezeptDetailAdv.php?id="+ arr[i].id);
+        a.appendChild(anchor);
         b = document.createElement("DIV");
         /*make the matching letters bold:*/
-        b.innerHTML = "<strong>" + arr[i].title.substr(0, val.length) + "</strong>";
-        b.innerHTML += arr[i].title.substr(val.length);
+        b.innerHTML = "<a href=RezeptDetailAdv.php?id="+ arr[i].id +"'<strong>" + arr[i].title.substr(0, val.length) + "</strong>";
+        b.innerHTML += arr[i].title.substr(val.length) + "</a>";
         /*insert a input field that will hold the current array item's value:*/
         b.innerHTML += "<input type='hidden' value='" + arr[i].title + "'>";
         /*execute a function when someone clicks on the item value (DIV element):*/
@@ -240,7 +243,7 @@ function autocomplete(inp, arr) {
           (or any other open lists of autocompleted values:*/
           closeAllLists();
         });
-        a.appendChild(b);
+        anchor.appendChild(b);
       }
     }
   });

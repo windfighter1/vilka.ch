@@ -126,169 +126,7 @@ function ConnectToDB()
             </div>
         </div>    
       </form>
-
-    </div>
-    <div class ="search_option_container">
-        <ul class="nav">
-
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Zubereitungsart</a>
-              <div class="dropdown-menu">
-                <ul>
-                  <li>
-                    <a href="#" class="small" data-value="test" tabIndex="-1">
-                      <input type="checkbox" name="" />&nbsp;Test</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                </ul>
-              </div>
-            </li>
-    
-    
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Herkunft</a>
-              <div class="dropdown-menu">
-                <ul>
-                  <li>
-                    <a href="#" class="small" data-value="option7" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Afrika</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option8" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Asien</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option9" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Australien</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option10" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Europa</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option11" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Nordamerika</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option12" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Südamerika</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-    
-    
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Ernährungsweise</a>
-              <div class="dropdown-menu">
-                <ul>
-                  <li>
-                    <a href="#" class="small" data-value="option13" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Vegan</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option14" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Vegetarisch</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option15" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Pescetarisch</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option16" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Ohne Nüsse</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option17" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Ohne Gluten</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option18" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Ohne Lactose</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-    
-    
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Zeitaufwand</a>
-              <div class="dropdown-menu">
-                <ul>
-                  <li>
-                    <a href="#" class="small" data-value="option19" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;
-                      < 15min.</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option20" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;
-                      < 30min.</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option21" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;
-                      < 1h.</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option22" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;> 1h.</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-    
-    
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Anlass</a>
-              <div class="dropdown-menu">
-                <ul>
-    
-                  <li>
-                    <a href="#" class="small" data-value="option23" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Festtage</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option24" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Candlelight</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option25" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Picnic</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option26" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Kochen im Freien</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li>
-                    <a href="#" class="small" data-value="option27" tabIndex="-1">
-                      <input type="checkbox" />&nbsp;Sonntags brunch</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-
-
-    </div>
-    <div class="result row">
+      <div class="result row">
      <?php 
      if(isset($_POST['SubmitForm']))
       {
@@ -340,7 +178,7 @@ function ConnectToDB()
           $stmt = $conn->query($sql);
           $row = $stmt->fetchObject();
           $Kuerzel = $row->Kuerzel;
-          echo "<div class='column'><a href='RezeptDetailAdv.php?id=".$recipeSingle["ID_Rezept"]."'>";
+          echo "<div class='column' style='margin-left: 0;'><a href='RezeptDetailAdv.php?id=".$recipeSingle["ID_Rezept"]."'>";
           echo "<div class='img_container'><img src='img/Rezepte/RealRecipes/".$recipeSingle["Bild"]."'></div>";
           echo "<div class='teaser__inner'><h3>".$recipeSingle["Name"]." <i class='em ".$Kuerzel."'></i></h3><h6 class='thin'><i>".$recipeSingle["Phonetisch"]."</i></h6><br><h6><i class='fa fa-info-circle'></i>".$recipeSingle["Portionen"] ." Portionen</h6><h6><i class='fa fa-clock-o'></i> ".$recipeSingle["Zeit"]." min</h6></div>";
           echo "</a></div>";
@@ -349,6 +187,8 @@ function ConnectToDB()
       }
     ?>
       </div>
+    </div>
+    
   </div>
   <?php
       $db = ConnectToDB();

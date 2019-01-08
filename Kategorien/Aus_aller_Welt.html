@@ -34,57 +34,69 @@
         </script>
         </head>
   <body>
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark ">
-               
-               
-              
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-            <a class="navbar-brand" href="../Home.html" >
-                <div class="imgcontainer">
-                <img class="main" src="../img/fork1.png" height="35" alt="VILKA">
-                <img class="glow" src="../img/fork1.png" height="35">
-                </div>    
-             </a>
-        
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                    <a class="nav-link" href="../Home.html">Home</a>
-                    </li>
-            <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="../Kategorien.html" id="navbarDropdown">
-                        Rezepte
-                    </a>
-                   
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../Kategorien/Nach_Art.html">Nach Zubereitungsart</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../+suche.html">Nach Zutaten</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Aus aller Welt</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../Kategorien/Für_besondere_Anlässe.html">Für besondere Anlässe</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../Kategorien/Ernährung_&_Allergien.html">Ernährung & Allergien</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../Kategorien/Drinks_&_Desserts.html">Drinks & Desserts</a>
-                    </div> <span class="sr-only">(current)</span>
-                    </li>
-            <li class="nav-item">
-                <div class= "container2">
+      <nav class="navbar sticky-top navbar-expand-lg navbar-dark ">
+
+
+
+          <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+              <div class="imgcontainer">
+                <img class="main" src="img/fork1.png" height="35" alt="VILKA">
+                <img class="glow" src="img/fork1.png" height="35">
+              </div>
+            </a>
+      
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="Kategorien.html" id="navbarDropdown">
+                    Rezepte
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="Kategorien/Nach_Art.html">Nach Zubereitungsart</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="+suche.html">Nach Zutaten</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="Kategorien/Aus_aller_Welt.html">Aus aller Welt</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="Kategorien/Für_besondere_Anlässe.html">Für besondere Anlässe</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="Kategorien/Ernährung_&_Allergien.html">Ernährung & Allergien</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" style="pointer-events: none;cursor: default;opacity:0.5">Drinks & Desserts</a>
+                  </div>
+                </li>
+      
+                <a class="nav-link" href="#">About
+                  <span class="sr-only">(current)</span>
+                </a>
+      
+                <!-- searchRecipe -->
+      
+      
+                <li class="nav-item">
+                  <div class="container2">
                     <div class="search-box">
-                      <input type="text">
+                      <form autocomplete="off" action="Rezeptdetail.html"></form>
+                      <input id="searchRecipe" type="text">
                       <span></span>
+                      </form>
                     </div>
                   </div>
-             </li>
-          </ul>
-        </div>
-      </div>
-     </nav>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
 
     
 
@@ -92,7 +104,7 @@
         
         <div class="container"> 
 
-                <nav aria-label="breadcrumb-dark">
+                <nav style="display:none" aria-label="breadcrumb-dark">
                         <ol class="breadcrumb">
                           <li class="breadcrumb-item"><a href="../Kategorien.html">Rezepte</a></li>
                           <li class="breadcrumb-item active" aria-current="page">Aus Aller Welt</li>
@@ -104,18 +116,16 @@
 
             <!-- CSSMap - Continents -->
 <div id="map-continents">
-    <ul class="continents">
-     <li class="c1"><a href="Aus_aller_Welt/Afrika.html">Afrika</a></li>
-     <li class="c2"><a href="Aus_aller_Welt/Asien.html">Asien</a></li>
-     <li class="c3"><a href="Aus_aller_Welt/Australien.html">Australien</a></li>
-     <li class="c4"><a href="Aus_aller_Welt/Europa.html">Europa</a></li>
-     <li class="c5"><a href="Aus_aller_Welt/Nordamerika.html">Nord America</a></li>
-     <li class="c6"><a href="Aus_aller_Welt/Südamerika.html">Süd America</a></li>
-    </ul>
-   </div>
+  <ul class="continents">
+    <li class="c1"><a href="../Resultat.php?category=kontinent&value=af">Afrika</a></li>
+    <li class="c2"><a href="../Resultat.php?category=kontinent&value=as">Asien</a></li>
+    <li class="c3"><a href="../Resultat.php?category=kontinent&value=au">Australien</a></li>
+    <li class="c4"><a href="../Resultat.php?category=kontinent&value=eu">Europa</a></li>
+    <li class="c5"><a href="../Resultat.php?category=kontinent&value=na">Nord America</a></li>
+    <li class="c6"><a href="../Resultat.php?category=kontinent&value=sa">Süd America</a></li>
+  </ul>
+</div>
    <!-- END OF THE CSSMap - Continents -->     
-               
-
 
 <!--Footer-->
 <footer class="page-footer">
@@ -127,14 +137,6 @@
       
                   <!--First column-->
                   <div class="col-md-6">
-                      <ul>
-                        <li><a href="#"><i class="fas fa-envelope"></i></a></li>
-                        <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fab fa-paypal"></i></a></li>
-                      </ul>
-               
                    <div class="arrow">
                       <a href="#"><i class="fas fa-angle-up"></i></a>
                    </div>

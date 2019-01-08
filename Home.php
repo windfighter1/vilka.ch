@@ -22,7 +22,8 @@ foreach($rows as $row)
 }
 $ingredientString = implode(",",$ingredientSource);
       
-      ?><!doctype html>
+      ?>
+     <!doctype html>
 
 <head>
 
@@ -94,7 +95,7 @@ $ingredientString = implode(",",$ingredientSource);
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="Kategorien/Ernährung_&_Allergien.html">Ernährung & Allergien</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="Kategorien/Drinks_&_Desserts.html">Drinks & Desserts</a>
+              <a class="dropdown-item" style="pointer-events: none;cursor: default;opacity:0.5">Drinks & Desserts</a>
             </div>
           </li>
 
@@ -144,7 +145,7 @@ $ingredientString = implode(",",$ingredientSource);
               <p>
                 <span>In China werden Pfannkuchen meisstens salzig mit oder ohne Füllung als Beilage gegessen. Ich zeige euch wie der Klassiker gefüllt mit Frühlingswiebeln gemacht wird.</span>
               </p>
-              <a class="btn btn-lg btn-primary" href="http://vilka.ch/RezeptDetailAdv.php?id=11" role="button">Zum Rezept</a>
+              <a class="btn btn-outline-light" href="http://vilka.ch/RezeptDetailAdv.php?id=11" role="button">Zum Rezept</a>
             </div>
           </div>
         </div>
@@ -164,7 +165,7 @@ $ingredientString = implode(",",$ingredientSource);
               <p>
                 <span>[ʊzbʲˈekskʲɪj plˈof] - Plov wird in ganz Zentral Asien gegessen, die ursprüngliche Bezeichnung stammt wahrscheinlich aus Iran (persisch پلو / polow, auch pollo) - "Reis".  </span>
               </p>
-              <a class="btn btn-lg btn-primary" href="#" role="button">Zum Rezept</a>
+              <a class="btn btn-outline-light" href="#" role="button">Zum Rezept</a>
             </div>
           </div>
         </div>
@@ -184,7 +185,7 @@ $ingredientString = implode(",",$ingredientSource);
               <p>
                 <span>Der Ursprung des Namens ist ungeklärt. Eine der Erklärungen soll er darauf zurückgehen, dass Prostituierte das Gericht schnell und einfach zwischen Besuchen ihrer Freier zubereiten konnten.</span>
               </p>
-              <a class="btn btn-lg btn-primary" href="http://vilka.ch/RezeptDetailAdv.php?id=14" role="button">Zum Rezept</a>
+              <a class="btn btn-outline-light" href="http://vilka.ch/RezeptDetailAdv.php?id=14" role="button">Zum Rezept</a>
             </div>
           </div>
         </div>
@@ -210,11 +211,10 @@ $ingredientString = implode(",",$ingredientSource);
     <hr class="featurette-divider">
     <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading">10 neue Rezepte für den Sommer.
-          <span class="text-muted">Zeig Ihnen wer der Grillmeister ist!</span>
+        <h2 class="featurette-heading">Chicken Karaage
+          <span class="text-muted">Mit Asiatischem Coleslaw</span>
         </h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo
-          cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        <p class="lead"></p>
         <p>
           <a class="btn btn-secondary" href="#" role="button">Zum Rezept &raquo;</a>
         </p>
@@ -262,16 +262,19 @@ $ingredientString = implode(",",$ingredientSource);
     <h1 style="text-align:center">About Vilka</h2>
 
       <hr class="featurette-divider">
-
-      <p>Vilka oder вилка (kyrillisch) bedeutet auf Russisch Gabel. Als Rezepteseite mit Erweiterter Suche hat Vilka das Ziel
-        mir bei der Entscheidung zu helfen: «Was koche ich heute?». Ich interessiere mich für Essen aus aller Welt und habe mir mittlerweile über 120 Rezepte angesammelt. Diese aber wurden in meinem Kopf oder meiner riesigen Youtube Playlist gespeichert - viel zu unübersichtlich. Es musste bessere Lösung her, eine bei der man z.B. nach Zutaten suchen kann, die man noch Zuhause hat. Aus diesem Grund habe ich Vilka ins Leben gerufen, primär um mir und eventuell auch euch den Alltag ein kleines bisschen unkoplizierter zu machen.
-      </p>
-<br><br> <br>
-
-
-
-
-
+      <div class="row">
+        <div class="column col-md-3"><img src="http://placekitten.com/g/200/200" height="200px" width="200px" margin"20%"></div>
+        <div class="column col-md-9"><p>Vilka oder вилка (kyrillisch) bedeutet auf Russisch Gabel. Als Rezepteseite mit Erweiterter Suche hat Vilka das Ziel
+          mir bei der Entscheidung zu helfen: «Was koche ich heute?». Ich interessiere mich für Essen aus aller Welt und habe mir mittlerweile sicher schon über 150 Rezepte angesammelt.
+           Diese sind aber in meinem Kopf oder meiner riesigen Youtube Playlist gespeichert - viel zu unübersichtlich.
+            Es musste eine bessere Lösung her, eine bei der man z.B. nach Zutaten suchen kann, die man noch Zuhause hat.
+            Ebenfalls kenne ich viele Leute die Aufgrund ihrer Diät oder Allergie auf gewisse Zutaten verzichten müssen.
+             Aus diesem Grund habe ich Vilka ins Leben gerufen, um mir und euch den Alltag ein kleines bisschen unkomplizierter zu machen.</p></div>
+        
+        <!--<p style="float: left;"></p>-->
+        
+    </div>
+<br><br><br>
 
 
   </div>

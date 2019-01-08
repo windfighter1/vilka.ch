@@ -12,57 +12,69 @@
     <title>VILKA</title>
   </head>
   <body>
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark ">
-               
-               
-              
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-            <a class="navbar-brand" href="../Home.html" >
-                <div class="imgcontainer">
-                <img class="main" src="../img/fork1.png" height="35" alt="VILKA">
-                <img class="glow" src="../img/fork1.png" height="35">
-                </div>    
-             </a>
-        
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                    <a class="nav-link" href="../Home.html">Home</a>
-                    </li>
-            <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="../Kategorien.html" id="navbarDropdown">
-                        Rezepte
-                    </a>
-                   
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../Kategorien/Nach_Art.html">Nach Art</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../+suche.html">Nach Zutaten</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../Kategorien/Aus_aller_Welt.html">Aus aller Welt</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Für besondere Anlässe</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../Kategorien/Ernährung_&_Allergien.html">Ernährung & Allergien</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../Kategorien/Drinks_&_Desserts.html">Drinks & Desserts</a>
-                    </div> <span class="sr-only">(current)</span>
-                    </li>
-            <li class="nav-item">
-                <div class= "container2">
-                    <div class="search-box">
-                      <input type="text">
-                      <span></span>
+        <nav class="navbar sticky-top navbar-expand-lg navbar-dark ">
+
+
+
+                <div class="container">
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">
+                    <div class="imgcontainer">
+                      <img class="main" src="../img/fork1.png" height="35" alt="VILKA">
+                      <img class="glow" src="../img/fork1.png" height="35">
                     </div>
+                  </a>
+            
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                      <li class="nav-item active">
+                        <a class="nav-link" href="#">Home
+                          <span class="sr-only">(current)</span>
+                        </a>
+                      </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="../Kategorien.html" id="navbarDropdown">
+                          Rezepte
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="Nach_Art.html">Nach Zubereitungsart</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="../advanced.php">Nach Zutaten</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="Aus_aller_Welt.html">Aus aller Welt</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="Für_besondere_Anlässe.html">Für besondere Anlässe</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="Ernährung_&_Allergien.html">Ernährung & Allergien</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" style="pointer-events: none;cursor: default;opacity:0.5">Drinks & Desserts</a>
+                        </div>
+                      </li>
+            
+                      <a class="nav-link" href="#">About
+                        <span class="sr-only">(current)</span>
+                      </a>
+            
+                      <!-- searchRecipe -->
+            
+            
+                      <li class="nav-item">
+                        <div class="container2">
+                          <div class="search-box">
+                            <form autocomplete="off" action="Rezeptdetail.html"></form>
+                            <input id="searchRecipe" type="text">
+                            <span></span>
+                            </form>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
-             </li>
-          </ul>
-        </div>
-      </div>
-     </nav>
+                </div>
+              </nav>
 
     
 
@@ -70,7 +82,7 @@
         
         <div class="container"> 
 
-                <nav aria-label="breadcrumb-dark">
+                <nav style="display:none" aria-label="breadcrumb-dark">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="../Kategorien.html">Rezepte</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Für besondere Anlässe</li>
@@ -80,25 +92,25 @@
                  
                 <div class="row">
                     <div class="column" >
-                            <a href="../temp2.html"><img src="../img\anlass/christmas-dinner-2428029_960_720.jpg"><figcaption>Festtage</figcaption></a>
+                            <a href="../Resultat.php?category=anlass&value=ft"><img src="../img\anlass/christmas-dinner-2428029_960_720.jpg"><figcaption>Festtage</figcaption></a>
                         </div>
                     <div class="column">
-                        <a href="../temp2.html"><img src="../img\anlass/candlelight.jpg"><figcaption>CandleLight</figcaption></a>
+                        <a href="../Resultat.php?category=anlass&value=cl"><img src="../img\anlass/candlelight.jpg"><figcaption>CandleLight</figcaption></a>
                     </div>
                 <div class="column">
-                        <a href="../temp2.html"><img src="../img\anlass/dinnerparty.jpg"><figcaption>Dinnerparty</figcaption></a>
+                        <a href="../Resultat.php?category=anlass&value=dp"><img src="../img\anlass/dinnerparty.jpg"><figcaption>Dinnerparty</figcaption></a>
                     </div>
                 </div>
 
             <div class="row">
                     <div class="column" >
-                            <a href="../temp2.html"><img src="../img\Rezepte\festessen.jpg"><figcaption>Picnic</figcaption></a>
+                            <a href="../Resultat.php?category=anlass&value=pc"><img src="../img\Rezepte\festessen.jpg"><figcaption>Picnic</figcaption></a>
                         </div>
                     <div class="column" >
-                            <a href="../temp2.html"><img src="../img\Rezepte\allergien.jpg"><figcaption>Kochen im Freien</figcaption></a>
+                            <a href="../Resultat.php?category=anlass&value=kf"><img src="../img\Rezepte\allergien.jpg"><figcaption>Kochen im Freien</figcaption></a>
                         </div>
                     <div class="column" >
-                        <a href="../temp2.html"><img src="../img\Rezepte\dessert.jpg"><figcaption>Sonntags Brunch</figcaption></a>
+                        <a href="../Resultat.php?category=anlass&value=sb"><img src="../img\Rezepte\dessert.jpg"><figcaption>Sonntags Brunch</figcaption></a>
                     </div>
                 
             </div>   
@@ -117,13 +129,6 @@
       
                   <!--First column-->
                   <div class="col-md-6">
-                      <ul>
-                        <li><a href="#"><i class="fas fa-envelope"></i></a></li>
-                        <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fab fa-paypal"></i></a></li>
-                      </ul>
                
                    <div class="arrow">
                       <a href="#"><i class="fas fa-angle-up"></i></a>

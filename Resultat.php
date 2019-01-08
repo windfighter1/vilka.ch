@@ -4,7 +4,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
     crossorigin="anonymous">
@@ -16,59 +16,69 @@
 </head>
 
 <body>
-  <nav class="navbar sticky-top navbar-expand-lg navbar-dark ">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark ">
 
 
 
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="Home.html">
-        <div class="imgcontainer">
-          <img class="main" src="img/fork1.png" height="35" alt="VILKA">
-          <img class="glow" src="img/fork1.png" height="35">
+<div class="container">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">
+    <div class="imgcontainer">
+      <img class="main" src="img/fork1.png" height="35" alt="VILKA">
+      <img class="glow" src="img/fork1.png" height="35">
+    </div>
+  </a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="Kategorien.html" id="navbarDropdown">
+          Rezepte
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="Kategorien/Nach_Art.html">Nach Zubereitungsart</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="+suche.html">Nach Zutaten</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="Kategorien/Aus_aller_Welt.html">Aus aller Welt</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="Kategorien/Für_besondere_Anlässe.html">Für besondere Anlässe</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="Kategorien/Ernährung_&_Allergien.html">Ernährung & Allergien</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" style="pointer-events: none;cursor: default;opacity:0.5">Drinks & Desserts</a>
         </div>
+      </li>
+
+      <a class="nav-link" href="#">About
+        <span class="sr-only">(current)</span>
       </a>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="Home.html">Home</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="Kategorien.html" id="navbarDropdown">
-              Rezepte
-            </a>
+      <!-- searchRecipe -->
 
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="Kategorien/Nach_Art.html">Nach Art</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="+suche.html">Nach Zutaten</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="Rezepteseite/Aus_aller_Welt.html">Aus aller Welt</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="Rezepteseite/Für_besondere_Anlässe.html">Für besondere Anlässe</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="Rezepteseite/Ernährung_&_Allergien.html">Ernährung & Allergien</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="Rezepteseite/Drinks_&_Desserts.html">Drinks & Desserts</a>
-            </div>
-            <span class="sr-only">(current)</span>
-          </li>
-          <li class="nav-item">
-            <div class="container2">
-              <div class="search-box">
-                <input type="text">
-                <span></span>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+
+      <li class="nav-item">
+        <div class="container2">
+          <div class="search-box">
+            <form autocomplete="off" action="Rezeptdetail.html"></form>
+            <input id="searchRecipe" type="text">
+            <span></span>
+            </form>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
 
 
 
@@ -172,33 +182,6 @@
 
         <!--First column-->
         <div class="col-md-6">
-          <ul>
-            <li>
-              <a href="#">
-                <i class="fas fa-envelope"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fab fa-google-plus-g"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fab fa-instagram"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fab fa-facebook"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fab fa-paypal"></i>
-              </a>
-            </li>
-          </ul>
 
           <div class="arrow">
             <a href="#">

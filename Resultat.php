@@ -154,15 +154,71 @@
             }
             break;
           case"anlass":
-          $sql = "SELECT * from rezept WHERE Anlass = '".$value."'";
-          $stmt = $conn->query($sql);
-          $recipes = $stmt->fetchAll();
-          break;
+            $sql = "SELECT * from rezept WHERE Anlass = '".$value."'";
+            $stmt = $conn->query($sql);
+            $recipes = $stmt->fetchAll();
+            break;
           case"zubereitung":
-          $sql = "SELECT * from rezept WHERE Zubereitung = '".$value."'";
-          $stmt = $conn->query($sql);
-          $recipes = $stmt->fetchAll();
-          break;
+            $sql = "SELECT * from rezept WHERE Zubereitung = '".$value."'";
+            $stmt = $conn->query($sql);
+            $recipes = $stmt->fetchAll();
+            break;
+          case"allergie":
+            foreach ($recipes as $recipeKey => $recipeValue)
+            {
+              $sql = "SELECT * from rezept_zutat WHERE Rezept_ID = ".$recipeValue["ID_Rezept"];
+              $stmt = $conn->query($sql);
+              $alleRezeptZutat = $stmt->fetchAll();
+              $ingredientsOfRecipe = [];
+              foreach($alleRezeptZutat as $RezeptZutat)
+              {
+                $sql = "SELECT * from zutat WHERE ID_Zutat = ".$RezeptZutat["Zutat_ID"];
+                $stmt = $conn->query($sql);
+                $ingredient = $stmt->fetchObject();
+                array_push($ingredientsOfRecipe,(array)$ingredient);
+              }
+              $valid = true;
+              $hasFish = false;
+              $IsVegetarian = false;
+              foreach($ingredientsOfRecipe as $ingredient)
+              {
+                if($value == "IsNut" || $value == "IsGluten" || $value == "IsLactose")
+                {
+                  if($ingredient[$value] == 1)
+                  {
+                    echo $ingredient[$value];
+                    $valid = false;
+                  }
+                }
+                else if($value == "IsVegan" || $value == "IsVegetarian")
+                {
+                  if($ingredient[$value] == 0)
+                  {
+                    $valid = false;
+                  }
+                }
+                else
+                {
+                  if($ingredient["IsFish"] == 1)
+                  {
+                      $hasFish = true;
+                  }
+                  if($ingredient["IsVegetarian"] == 1)
+                  {
+                      $IsVegetarian = true;
+                  }
+                }
+              }
+              if($value == "IsPescetarian" && (!$hasFish || !$IsVegetarian))
+              {
+                  $valid = false;
+              }
+              if (!$valid)
+              {
+                unset($recipes[$recipeKey]);
+              }
+            }
+            break;
     }
     printRecipes($recipes); 
     ?>

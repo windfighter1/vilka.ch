@@ -186,7 +186,6 @@
                 {
                   if($ingredient[$value] == 1)
                   {
-                    echo $ingredient[$value];
                     $valid = false;
                   }
                 }
